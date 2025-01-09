@@ -22,4 +22,21 @@ public class PersonService implements IPerson {
     public Optional<Person> findById(Long id) {
         return personRepository.findById(id);
     }
+
+    @Override
+    public void addPerson(Person person) {
+        personRepository.save(person);
+    }
+
+    @Override
+    public void updatePerson(Person person) {
+        personRepository.save(person);
+    }
+
+    @Override
+    public void deletePerson(Long id) {
+        personRepository.deleteById(id);
+    }
+
+
 }

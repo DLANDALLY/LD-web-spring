@@ -7,6 +7,8 @@ import java.util.Optional;
 
 public interface IPerson {
     List<Person> findAll();
-
     Optional<Person> findById(Long id);
+    void addPerson(Person person);
+    void updatePerson(Person person);
+    void deletePerson(Long id);
 }
