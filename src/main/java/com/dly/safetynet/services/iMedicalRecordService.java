@@ -4,5 +4,5 @@ import com.dly.safetynet.services.interfaces.IMedicalRecord;
 import org.springframework.stereotype.Service;
 
 @Service
-public class iMedicalRecordImpl implements IMedicalRecord {
+public class iMedicalRecordService implements IMedicalRecord {
 }
