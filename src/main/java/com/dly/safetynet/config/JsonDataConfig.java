@@ -13,6 +13,6 @@ public class JsonDataConfig implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        jsonDataService.loadDataFromJson();
+        this.jsonDataService.loadDataFromJson();
     }
 }

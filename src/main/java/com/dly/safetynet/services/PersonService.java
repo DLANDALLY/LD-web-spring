@@ -1,5 +1,6 @@
 package com.dly.safetynet.services;
 
+import com.dly.safetynet.dto.PersonDto;
 import com.dly.safetynet.entities.Person;
 import com.dly.safetynet.repositories.PersonRepository;
 import com.dly.safetynet.services.interfaces.IPerson;
@@ -36,6 +37,11 @@ public class PersonService implements IPerson {
     @Override
     public void deletePerson(Long id) {
         personRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Person> findByAddress(String address) {
+        return personRepository.findByAddress(address);
     }
 
 
