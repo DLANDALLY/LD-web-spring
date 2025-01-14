@@ -1,14 +1,8 @@
 package com.dly.safetynet.entities;
 
-import jakarta.persistence.*;
-import lombok.*;
 
-@Entity
 public class Person {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column
     private String firstName;
     private String lastName;
     private String address;

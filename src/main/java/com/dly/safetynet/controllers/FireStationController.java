@@ -1,24 +1,35 @@
 package com.dly.safetynet.controllers;
 
-import com.dly.safetynet.entities.FireStation;
-import com.dly.safetynet.entities.Person;
-import com.dly.safetynet.repositories.FireStationRepository;
+import com.dly.safetynet.dto.childAlert.ChildAlertDto;
+import com.dly.safetynet.services.JsonDataService;
 import com.dly.safetynet.services.interfaces.IFireStation;
+import com.dly.safetynet.services.interfaces.IPerson;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
-import java.util.Map;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
+@RequestMapping("/")
 public class FireStationController {
     @Autowired
-    private IFireStation fs;
+    private IFireStation fireStationService;
     @Autowired
-    private FireStationRepository fireStationRepository;
+    private IPerson personService;
+    @Autowired
+    private JsonDataService jsonDataService;
+
+
+    @GetMapping
+    public ResponseEntity<?> getFirestation(){
+        try {
+            return ResponseEntity.ok(jsonDataService.getPersons());
+        } catch (IllegalArgumentException iae){
+            return ResponseEntity.badRequest().body(iae.getMessage());
+        }
+    }
+
+
     /**
      * http://localhost:8080/firestation?stationNumber=<station_number>
      * Cette url doit retourner une liste des personnes couvertes par la caserne de pompiers
@@ -28,24 +39,32 @@ public class FireStationController {
      * De plus, elle doit fournir un décompte du nombre d'adultes et du nombre d'enfants
      * (tout individu âgé de 18 ans ou moins) dans la zone desservie.
      */
-    @GetMapping(value ="/firestation/stationNumber/{station}")
-    public Map<FireStation, List<Person>> getFirestation(@PathVariable("station") String station){
-        return fs.personCoverageByFireStation(station);
+    @GetMapping(value ="/firestation")
+    public ResponseEntity<?> getFirestation(@RequestParam("stationNumber") String station){
+        try {
+            return ResponseEntity.ok(fireStationService.personCoverageByFireStation(station));
+        } catch (IllegalArgumentException iae){
+            return ResponseEntity.badRequest().body(iae.getMessage());
+        }
     }
-    //Error creating bean with name 'fireStationService': Unsatisfied dependency expressed through field 'recordService':
-    // Error creating bean with name 'medicalRecordService': Unsatisfied dependency expressed through field 'medicalRecordDtoRepository':
-    // Error creating bean with name 'medicalRecordDtoRepository' defined in com.dly.safetynet.repositories.MedicalRecordDtoRepository
-    // defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration:
-    // Not a managed type: class com.dly.safetynet.dto.MedicalRecordDto
+
+     /**
+     * http://localhost:8080/childAlert?address=<address>
+     * Cette url doit retourner une liste d'enfants (tout individu âgé de 18 ans ou moins) habitant à cette adresse.
+     * La liste doit comprendre le prénom et le nom de famille de chaque enfant, son âge et une liste des autres
+     * membres du foyer. S'il n'y a pas d'enfant, cette url peut renvoyer une chaîne vide.
+     */
+     @GetMapping(value ="/childAlert")
+     public ResponseEntity<?> getChildAlert(@RequestParam("address")String address){
+         ChildAlertDto childAlertDto = personService.getChildAlert(address);
+         if (childAlertDto.getChildren().isEmpty()){
+             return ResponseEntity.ok(null);
+         } else {
+             return ResponseEntity.ok(childAlertDto);
+         }
+     }
 
 
-
-//     /**
-//     * http://localhost:8080/childAlert?address=<address>
-//     * Cette url doit retourner une liste d'enfants (tout individu âgé de 18 ans ou moins) habitant à cette adresse.
-//      * La liste doit comprendre le prénom et le nom de famille de chaque enfant, son âge et une liste des autres
-//      * membres du foyer. S'il n'y a pas d'enfant, cette url peut renvoyer une chaîne vide.
-//      */
 //     /**
 //     * http://localhost:8080/phoneAlert?firestation=<firestation_number>
 //     * Cette url doit retourner une liste des numéros de téléphone des résidents desservis par la caserne de pompiers.

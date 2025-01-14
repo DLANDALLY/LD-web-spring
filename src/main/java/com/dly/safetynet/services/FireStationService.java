@@ -1,9 +1,9 @@
 package com.dly.safetynet.services;
 
+import com.dly.safetynet.dto.FireStationResponse;
+import com.dly.safetynet.dto.PersonDto;
 import com.dly.safetynet.entities.FireStation;
 import com.dly.safetynet.entities.MedicalRecord;
-import com.dly.safetynet.entities.Person;
-import com.dly.safetynet.repositories.FireStationRepository;
 import com.dly.safetynet.services.interfaces.IFireStation;
 import com.dly.safetynet.services.interfaces.IMedicalRecord;
 import com.dly.safetynet.services.interfaces.IPerson;
@@ -11,74 +11,127 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class FireStationService implements IFireStation {
     @Autowired
+    private JsonDataService jsonData;
+    @Autowired
     private IPerson personService;
     @Autowired
-    private FireStationRepository fireStationRepository;
-    @Autowired
-    private IMedicalRecord recordService;
+    private IMedicalRecord medicalRecordService;
 
 
+
+    /**
+     * http://localhost:8080/firestation?stationNumber=<station_number>
+     * Cette url doit retourner une liste des personnes couvertes par la caserne de pompiers
+     * correspondante. Donc, si le numéro de station = 1, elle doit renvoyer les habitants
+     * couverts par la station numéro 1. La liste doit inclure les informations spécifiques
+     * suivantes : prénom, nom, adresse, numéro de téléphone.
+     * De plus, elle doit fournir un décompte du nombre d'adultes et du nombre d'enfants
+     * (tout individu âgé de 18 ans ou moins) dans la zone desservie.
+     */
     @Override
-    public Map<FireStation, List<Person>> personCoverageByFireStation(String station) {
-        //Find by numero de station
-        List<FireStation> fireStations = getFireStationByStation(station);
+    public FireStationResponse personCoverageByFireStation(String station) {
+        if (station == null || station.isBlank()) throw new IllegalArgumentException("Station number cannot be null or blank");
 
-        //List de person by address
-        //DATA person : prénom, nom, adresse, numéro de téléphone
-        Map<FireStation, List<Person>> coverageData = new HashMap<>();
-        for (FireStation station1 : fireStations) {
-            coverageData.put(station1, personService.findByAddress(station1.getAddress()));
-        }
+        List<String> addresses = getAdresses(station);
+        if (addresses.isEmpty()) throw new IllegalArgumentException("List of addresses is empty");
 
-        coverageData.forEach((k, v) -> System.out.println("## FireStation : " + k.getAddress() + " - " + v.size() + " person(s)"));
+        List<PersonDto> persons = getPersonsDto(addresses);
+        if (persons.isEmpty()) throw new IllegalArgumentException("List of persons is empty");
 
+        List<MedicalRecord> birthdays = getBirthdays(persons);
+        if (birthdays.isEmpty()) throw new IllegalArgumentException("List of birth days is empty");
 
-        //Count adults and children by age 18 and under
-        //List<MedicalRecord> birthdays = recordService.findBirthdayByFirstNameAndLastName(persons);
-        //String countPerson = countPerson(birthdays);
+        int adultCount = getAdultCount(birthdays);
+        int childCount = birthdays.size() - adultCount;
 
-        return coverageData;
-    }
-
-    private void modelAsup(Map<FireStation, List<Person>> persons){
-        persons.forEach((k, v) -> {
-            List<MedicalRecord> birthdays = recordService.findBirthdayByFirstNameAndLastName(v);
-            String countPerson = countPerson(birthdays);
-            System.out.println("## FireStation : " + k.getAddress() + " - " + countPerson);
-        });
+        return new FireStationResponse(station, persons, adultCount, childCount);
     }
 
     @Override
-    public List<FireStation> getFireStationByStation(String station){
-        return fireStationRepository.findByStation(station);
+    public List<String> getAdresses(String station) {
+        return jsonData.getFirestations().stream()
+               .filter(fs -> fs.getStation().equals(station))
+               .map(FireStation::getAddress)
+               .collect(Collectors.toList());
     }
 
-    private boolean isOver18(String birthDate) {
-        LocalDate today = LocalDate.now();
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate dateOfBirth = LocalDate.parse(birthDate, formatter);
-
-        Period age = Period.between(dateOfBirth, today);
-        return age.getYears() >= 18;
+    @Override
+    public List<PersonDto> getPersonsDto(List<String> addresses){
+        return addresses.stream()
+                .flatMap(address -> personService.findByAddress(address).stream())
+                .toList();
     }
 
-    private String countPerson(List<MedicalRecord> medicalRecords) {
-        int adultCount = 0;
-        int childCount = 0;
-        Date now = new Date();
-        for (MedicalRecord medicalRecord : medicalRecords){
-            if (isOver18(medicalRecord.getBirthdate())) adultCount++;
-            else childCount++;
-        }
-        System.out.println("Child count: " + childCount + " adult count: " + adultCount);
-        return "Child count: " + childCount + " adult count: " + adultCount;
+    @Override
+    public List<MedicalRecord> getBirthdays(List<PersonDto> persons){
+        return medicalRecordService.findBirthdayByFirstNameAndLastName(persons);
     }
+
+    @Override
+    public int getAdultCount(List<MedicalRecord> medicalRecords){
+        return (int) medicalRecords.stream()
+                .filter(medicalRecord -> isOver18(medicalRecord.getBirthdate()))
+                .count();
+    }
+
+    @Override
+    public boolean isOver18(String birthDate) {
+        LocalDate dateOfBirth = LocalDate.parse(birthDate, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+        return !dateOfBirth.isAfter(LocalDate.now().minusYears(18));
+    }
+
+    /*@Override
+    public FireStationResponse personCoverageByFireStation(String station) {
+        if (station == null || station.isBlank()) throw new IllegalArgumentException("Station number cannot be null or blank");
+
+        List<String> addresses = getAdresses(station);
+        if (addresses.isEmpty()) throw new IllegalArgumentException("List of addresses is empty");
+
+        List<PersonDto> persons = getPersonsDto(addresses);
+        if (persons.isEmpty()) throw new IllegalArgumentException("List of persons is empty");
+
+        List<MedicalRecord> birthdays = getBirthdays(persons);
+        if (birthdays.isEmpty()) throw new IllegalArgumentException("List of birth days is empty");
+
+        int adultCount = getAdultCount(birthdays);
+        int childCount = birthdays.size() - adultCount;
+
+        return new FireStationResponse(station, persons, adultCount, childCount);
+    }
+
+
+    private List<String> getAdresses(String station){
+        return getFireStationByStation(station).stream()
+                .map(FireStation::getAddress)
+                .toList();
+    }
+    private List<PersonDto> getPersonsDto(List<String> addresses){
+        return addresses.stream()
+                .flatMap(address -> personService.findByAddress(address).stream())
+                .toList();
+    }
+
+    @Override
+    public List<MedicalRecord> getBirthdays(List<PersonDto> persons){
+        return recordService.findBirthdayByFirstNameAndLastName(persons);
+    }
+
+    @Override
+    public int getAdultCount(List<MedicalRecord> medicalRecords){
+        return (int) medicalRecords.stream()
+                .filter(medicalRecord -> isOver18(medicalRecord.getBirthdate()))
+                .count();
+    }
+
+    public boolean isOver18(String birthDate) {
+        LocalDate dateOfBirth = LocalDate.parse(birthDate, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+        return !dateOfBirth.isAfter(LocalDate.now().minusYears(18));
+    }*/
 }

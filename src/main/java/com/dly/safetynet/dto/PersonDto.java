@@ -7,6 +7,7 @@ public class PersonDto {
     private String address;
     private String phone;
 
+
     public String getFirstName() {
         return firstName;
     }
@@ -37,5 +38,16 @@ public class PersonDto {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("PersonDto{");
+        sb.append("firstName='").append(firstName).append('\'');
+        sb.append(", lastName='").append(lastName).append('\'');
+        sb.append(", address='").append(address).append('\'');
+        sb.append(", phone='").append(phone).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

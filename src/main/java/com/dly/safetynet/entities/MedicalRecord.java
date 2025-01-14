@@ -1,25 +1,18 @@
 package com.dly.safetynet.entities;
 
-import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
 
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class MedicalRecord {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstName;
     private String lastName;
     private String birthdate;
-    @ElementCollection
     private List<String> medications;
 
-    @ElementCollection
     private List<String> allergies;
 
     public Long getId() {
@@ -68,5 +61,18 @@ public class MedicalRecord {
 
     public void setAllergies(List<String> allergies) {
         this.allergies = allergies;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("MedicalRecord{");
+        sb.append("id=").append(id);
+        sb.append(", firstName='").append(firstName).append('\'');
+        sb.append(", lastName='").append(lastName).append('\'');
+        sb.append(", birthdate='").append(birthdate).append('\'');
+        sb.append(", medications=").append(medications);
+        sb.append(", allergies=").append(allergies);
+        sb.append('}');
+        return sb.toString();
     }
 }
