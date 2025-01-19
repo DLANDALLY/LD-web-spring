@@ -9,12 +9,12 @@ public class ChildDto {
     private String lastName;
     private int age;
 
-    private List<PersonDto> familyMembers;
+    private List<FamilyMembersDto> familyMembers;
 
     public ChildDto() {
     }
 
-    public ChildDto(String firstName, String lastName, int age, List<PersonDto> familyMembers) {
+    public ChildDto(String firstName, String lastName, int age, List<FamilyMembersDto> familyMembers) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -45,11 +45,11 @@ public class ChildDto {
         this.age = age;
     }
 
-    public List<PersonDto> getFamilyMembers() {
+    public List<FamilyMembersDto> getFamilyMembers() {
         return familyMembers;
     }
 
-    public void setFamilyMembers(List<PersonDto> familyMembers) {
+    public void setFamilyMembers(List<FamilyMembersDto> familyMembers) {
         this.familyMembers = familyMembers;
     }
 
