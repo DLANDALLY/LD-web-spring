@@ -1,7 +1,5 @@
 package com.dly.safetynet.entities;
 
-import lombok.*;
-
 import java.util.List;
 
 

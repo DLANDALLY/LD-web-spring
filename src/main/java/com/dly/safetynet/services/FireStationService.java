@@ -40,13 +40,13 @@ public class FireStationService implements IFireStation {
         if (station == null || station.isBlank()) throw new IllegalArgumentException("Station number cannot be null or blank");
 
         List<String> addresses = getAdresses(station);
-        if (addresses.isEmpty()) throw new IllegalArgumentException("List of addresses is empty");
+        if (addresses.isEmpty()) throw new IllegalArgumentException("No address is covered by this station number");
 
         List<PersonDto> persons = getPersonsDto(addresses);
-        if (persons.isEmpty()) throw new IllegalArgumentException("List of persons is empty");
+        if (persons.isEmpty()) throw new IllegalArgumentException("No residents are covered by this station number");
 
         List<MedicalRecord> birthdays = getBirthdays(persons);
-        if (birthdays.isEmpty()) throw new IllegalArgumentException("List of birth days is empty");
+        if (birthdays.isEmpty()) throw new IllegalArgumentException("The dates of birth are not entered correctly. ");
 
         int adultCount = getAdultCount(birthdays);
         int childCount = birthdays.size() - adultCount;
@@ -86,52 +86,4 @@ public class FireStationService implements IFireStation {
         LocalDate dateOfBirth = LocalDate.parse(birthDate, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
         return !dateOfBirth.isAfter(LocalDate.now().minusYears(18));
     }
-
-    /*@Override
-    public FireStationResponse personCoverageByFireStation(String station) {
-        if (station == null || station.isBlank()) throw new IllegalArgumentException("Station number cannot be null or blank");
-
-        List<String> addresses = getAdresses(station);
-        if (addresses.isEmpty()) throw new IllegalArgumentException("List of addresses is empty");
-
-        List<PersonDto> persons = getPersonsDto(addresses);
-        if (persons.isEmpty()) throw new IllegalArgumentException("List of persons is empty");
-
-        List<MedicalRecord> birthdays = getBirthdays(persons);
-        if (birthdays.isEmpty()) throw new IllegalArgumentException("List of birth days is empty");
-
-        int adultCount = getAdultCount(birthdays);
-        int childCount = birthdays.size() - adultCount;
-
-        return new FireStationResponse(station, persons, adultCount, childCount);
-    }
-
-
-    private List<String> getAdresses(String station){
-        return getFireStationByStation(station).stream()
-                .map(FireStation::getAddress)
-                .toList();
-    }
-    private List<PersonDto> getPersonsDto(List<String> addresses){
-        return addresses.stream()
-                .flatMap(address -> personService.findByAddress(address).stream())
-                .toList();
-    }
-
-    @Override
-    public List<MedicalRecord> getBirthdays(List<PersonDto> persons){
-        return recordService.findBirthdayByFirstNameAndLastName(persons);
-    }
-
-    @Override
-    public int getAdultCount(List<MedicalRecord> medicalRecords){
-        return (int) medicalRecords.stream()
-                .filter(medicalRecord -> isOver18(medicalRecord.getBirthdate()))
-                .count();
-    }
-
-    public boolean isOver18(String birthDate) {
-        LocalDate dateOfBirth = LocalDate.parse(birthDate, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-        return !dateOfBirth.isAfter(LocalDate.now().minusYears(18));
-    }*/
 }

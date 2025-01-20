@@ -24,20 +24,4 @@ public class MedicalRecordService implements IMedicalRecord {
                  .filter(record -> record != null && !record.getBirthdate().isEmpty())
                  .toList();
     }
-
-
-    /*@Override
-    public List<MedicalRecord> findBirthdayByFirstNameAndLastName(List<PersonDto> persons) {
-        return persons.stream()
-                .map(person -> medicalRecordRepository.findByFirstnameAndLastname(
-                        person.getFirstName(), person.getLastName()))
-                .toList();
-    }*/
-
-//    @Override
-//    public List<MedicalRecord> findBirthdayByLastname(List<PersonDto> persons) {
-//        return persons.stream()
-//                .map(person -> medicalRecordRepository.findBirthdayByLastname(person.getLastName()))
-//                .toList();
-//    }
 }

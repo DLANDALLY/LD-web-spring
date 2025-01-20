@@ -8,5 +8,4 @@ import java.util.List;
 
 public interface IMedicalRecord {
     List<MedicalRecord> findBirthdayByFirstNameAndLastName(List<PersonDto> persons);
-    //List<MedicalRecord> findBirthdayByLastname(List<PersonDto> persons);
 }
