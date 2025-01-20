@@ -1,8 +1,6 @@
 package com.dly.safetynet.controllers;
 
-import com.dly.safetynet.dto.childAlert.ChildAlertDto;
 import com.dly.safetynet.services.interfaces.IChildAlert;
-import com.dly.safetynet.services.interfaces.IPerson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,11 +22,10 @@ public class ChildAlertController {
      */
     @GetMapping()
     public ResponseEntity<?> getChildAlert(@RequestParam("address")String address){
-        ChildAlertDto childAlertDto = childAlertService.getChildAlert(address);
-        if (childAlertDto.getChildren().isEmpty()){
-            return ResponseEntity.ok(null);
-        } else {
-            return ResponseEntity.ok(childAlertDto);
+        try {
+            return ResponseEntity.ok(childAlertService.getChildAlert(address).getChildren());
+        }catch (IllegalArgumentException iae) {
+            return ResponseEntity.badRequest().body(iae.getMessage());
         }
     }
 }

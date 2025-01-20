@@ -1,16 +1,9 @@
 package com.dly.safetynet.controllers;
 
-import com.dly.safetynet.dto.childAlert.ChildAlertDto;
-import com.dly.safetynet.dto.phoneAlert.PhoneAlertDto;
-import com.dly.safetynet.entities.FireStation;
-import com.dly.safetynet.services.JsonDataService;
 import com.dly.safetynet.services.interfaces.IFireStation;
-import com.dly.safetynet.services.interfaces.IPerson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @RestController
