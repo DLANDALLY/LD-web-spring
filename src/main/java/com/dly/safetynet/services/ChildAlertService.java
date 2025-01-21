@@ -40,7 +40,7 @@ public class ChildAlertService implements IChildAlert {
         if (persons.isEmpty()) throw new IllegalArgumentException("No one lives at this address " + address);
 
         //Récupérer les enfants de cette adresse
-        List<MedicalRecord> medicalrecords = recordService.findBirthdayByFirstNameAndLastName(persons);
+        List<MedicalRecord> medicalrecords = recordService.findMedicalRecordByFirstNameAndLastName(persons);
         if (medicalrecords.isEmpty()) throw new IllegalArgumentException("No children living at this address");
 
         //Liste de persons avec leur ages
@@ -64,12 +64,13 @@ public class ChildAlertService implements IChildAlert {
         return medicalrecords.stream()
                 .map(m -> {
                     ChildDto childDto = modelMapper.map(m, ChildDto.class);
-                    childDto.setAge(age(m.getBirthdate()));
+                    childDto.setAge(calculateAge(m.getBirthdate()));
                     return childDto;
                 }).toList();
     }
 
-    private int age(String birthDay){
+    @Override
+    public int calculateAge(String birthDay){
         LocalDate dateOfBirth = LocalDate.parse(birthDay, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
         LocalDate now = LocalDate.now();
         return now.getYear() - dateOfBirth.getYear();

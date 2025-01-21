@@ -6,7 +6,6 @@ import com.dly.safetynet.services.interfaces.IMedicalRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -14,7 +13,7 @@ public class MedicalRecordService implements IMedicalRecord {
     @Autowired
     private JsonDataService jsonData;
     @Override
-    public List<MedicalRecord> findBirthdayByFirstNameAndLastName(List<PersonDto> persons) {
+    public List<MedicalRecord> findMedicalRecordByFirstNameAndLastName(List<PersonDto> persons) {
          return persons.stream()
                  .map(person -> jsonData.getMedicalRecords().stream()
                          .filter(record -> record.getFirstName().equals(person.getFirstName()) &&
