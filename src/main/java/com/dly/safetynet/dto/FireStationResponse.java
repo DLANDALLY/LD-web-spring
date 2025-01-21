@@ -54,4 +54,15 @@ public class FireStationResponse {
     public void setChildCount(int childCount) {
         this.childCount = childCount;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("FireStationResponse{");
+        sb.append("station='").append(station).append('\'');
+        sb.append(", persons=").append(persons);
+        sb.append(", adultCount=").append(adultCount);
+        sb.append(", childCount=").append(childCount);
+        sb.append('}');
+        return sb.toString();
+    }
 }

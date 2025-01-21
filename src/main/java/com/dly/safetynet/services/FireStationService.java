@@ -74,7 +74,14 @@ public class FireStationService implements IFireStation {
     @Override
     public List<PersonDto> getPersonsDto(List<String> addresses){
         return addresses.stream()
-                .flatMap(address -> personService.findByAddress(address).stream())
+                .flatMap(address -> personService.findPersonByAddress(address).stream())
+                .toList();
+    }
+
+    @Override
+    public List<PersonDto> getPersonsDto(Set<String> addresses){
+        return addresses.stream()
+                .flatMap(address -> personService.findPersonByAddress(address).stream())
                 .toList();
     }
 

@@ -19,7 +19,7 @@ public class PersonService implements IPerson {
 
 
     @Override
-    public List<PersonDto> findByAddress(String address) {
+    public List<PersonDto> findPersonByAddress(String address) {
         return jsonData.getPersons()
                 .stream()
                 .filter(p -> p.getAddress().equals(address))
