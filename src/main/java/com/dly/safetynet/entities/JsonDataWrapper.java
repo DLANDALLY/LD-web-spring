@@ -2,7 +2,6 @@ package com.dly.safetynet.entities;
 
 import java.util.List;
 
-
 public class JsonDataWrapper {
     private List<Person> persons;
     private List<FireStation> firestations;

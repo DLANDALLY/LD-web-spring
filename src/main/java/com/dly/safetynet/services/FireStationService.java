@@ -18,23 +18,18 @@ import java.util.stream.Collectors;
 @Service
 public class FireStationService implements IFireStation {
     @Autowired
-    private JsonDataService jsonData;
-    @Autowired
     private IPerson personService;
     @Autowired
     private IMedicalRecord medicalRecordService;
+    @Autowired
+    private JsonDataService jsonData;
 
 
+    @Override
+    public List<FireStation> findAllFireStations() {
+        return jsonData.getFirestations();
+    }
 
-    /**
-     * http://localhost:8080/firestation?stationNumber=<station_number>
-     * Cette url doit retourner une liste des personnes couvertes par la caserne de pompiers
-     * correspondante. Donc, si le numéro de station = 1, elle doit renvoyer les habitants
-     * couverts par la station numéro 1. La liste doit inclure les informations spécifiques
-     * suivantes : prénom, nom, adresse, numéro de téléphone.
-     * De plus, elle doit fournir un décompte du nombre d'adultes et du nombre d'enfants
-     * (tout individu âgé de 18 ans ou moins) dans la zone desservie.
-     */
     @Override
     public FireStationResponse personCoverageByFireStation(String station) {
         if (station == null || station.isBlank()) throw new IllegalArgumentException("Station number cannot be null or blank");
@@ -56,7 +51,7 @@ public class FireStationService implements IFireStation {
 
     @Override
     public List<String> findAdresses(String station) {
-        return jsonData.getFirestations().stream()
+        return findAllFireStations().stream()
                .filter(fs -> fs.getStation().equals(station))
                .map(FireStation::getAddress)
                .collect(Collectors.toList());
@@ -64,7 +59,7 @@ public class FireStationService implements IFireStation {
 
     @Override
     public FireStation findFireStationByAddress(String address){
-        return jsonData.getFirestations()
+        return findAllFireStations()
                 .stream()
                 .filter(fs -> fs.getAddress().equals(address))
                 .findFirst()
@@ -93,7 +88,7 @@ public class FireStationService implements IFireStation {
     @Override
     public int getAdultCount(List<MedicalRecord> medicalRecords){
         return (int) medicalRecords.stream()
-                .filter(medicalRecord -> isOver18(medicalRecord.getBirthdate()))
+                .filter(m -> isOver18(m.getBirthdate()))
                 .count();
     }
 

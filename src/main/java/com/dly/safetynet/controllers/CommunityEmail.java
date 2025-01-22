@@ -25,5 +25,4 @@ public class CommunityEmail {
             return ResponseEntity.badRequest().body("Invalid city");
         }
     }
-
 }

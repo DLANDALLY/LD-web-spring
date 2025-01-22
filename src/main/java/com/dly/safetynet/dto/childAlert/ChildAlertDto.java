@@ -1,8 +1,5 @@
 package com.dly.safetynet.dto.childAlert;
 
-import com.dly.safetynet.dto.PersonDto;
-import com.dly.safetynet.entities.Person;
-
 import java.util.List;
 
 public class ChildAlertDto {

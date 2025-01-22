@@ -25,5 +25,4 @@ public class PersonInfoLastNameController {
             return ResponseEntity.badRequest().body(iae.getMessage());
         }
     }
-
 }

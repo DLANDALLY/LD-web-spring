@@ -1,15 +1,10 @@
 package com.dly.safetynet.dto;
 
-
 import java.util.List;
 
-
 public class FireStationResponse {
-
     private String station;
-
     private List<PersonDto> persons;
-
     private int adultCount;
     private int childCount;
 

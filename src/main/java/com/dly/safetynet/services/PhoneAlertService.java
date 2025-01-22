@@ -3,6 +3,7 @@ package com.dly.safetynet.services;
 import com.dly.safetynet.dto.PersonDto;
 import com.dly.safetynet.dto.phoneAlert.PhoneAlertDto;
 import com.dly.safetynet.entities.FireStation;
+import com.dly.safetynet.services.interfaces.IFireStation;
 import com.dly.safetynet.services.interfaces.IPerson;
 import com.dly.safetynet.services.interfaces.IPhoneAlert;
 import org.modelmapper.ModelMapper;
@@ -15,27 +16,18 @@ import java.util.stream.Collectors;
 @Service
 public class PhoneAlertService implements IPhoneAlert {
     @Autowired
-    private ModelMapper modelMapper;
-    @Autowired
-    private JsonDataService jsonData;
-    @Autowired
     private IPerson personService;
+    @Autowired
+    private IFireStation fireStationService;
+    @Autowired
+    private ModelMapper modelMapper;
 
-
-    /**
-     * http://localhost:8081/phoneAlert?firestation=<firestation_number>
-     * Cette url doit retourner une liste des numéros de téléphone des résidents desservis
-     * par la caserne de pompiers.Nous l'utiliserons pour envoyer des messages texte d'urgence
-     * à des foyers spécifiques.
-     *
-     * @return
-     */
     @Override
     public List<PhoneAlertDto> getPhoneAlert(int firestationNumber){
-        if(firestationNumber < 1 || firestationNumber > jsonData.getFirestations().size())
-            throw new IllegalArgumentException("Firestation number should be between 1 and " + jsonData.getFirestations().size());
+        if(firestationNumber < 1 || firestationNumber > fireStationService.findAllFireStations().size())
+            throw new IllegalArgumentException("Firestation number should be between 1 and " + fireStationService.findAllFireStations().size());
 
-        List<FireStation> fireStations = addId(jsonData.getFirestations());
+        List<FireStation> fireStations = addId(fireStationService.findAllFireStations());
         if(fireStations.isEmpty()) throw new IllegalStateException("The fire station list is empty");
 
         FireStation fireStation = getFireStation(fireStations, firestationNumber);

@@ -1,12 +1,10 @@
 package com.dly.safetynet.dto;
 
-
 public class PersonDto {
     private String firstName;
     private String lastName;
     private String address;
     private String phone;
-
 
     public String getFirstName() {
         return firstName;

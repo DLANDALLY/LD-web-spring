@@ -31,5 +31,4 @@ public class FireController {
 
     //TODO Probleme avec le parametre phone = null
     //TODO Probleme de doublon avec houseHolds
-
 }

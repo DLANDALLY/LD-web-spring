@@ -1,6 +1,5 @@
 package com.dly.safetynet.entities;
 
-
 public class Person {
     private Long id;
     private String firstName;

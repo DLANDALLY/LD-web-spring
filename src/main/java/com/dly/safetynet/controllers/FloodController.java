@@ -30,5 +30,4 @@ public class FloodController {
             return ResponseEntity.badRequest().body(iae.getMessage());
         }
     }
-
 }

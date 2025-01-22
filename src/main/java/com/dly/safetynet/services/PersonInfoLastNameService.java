@@ -19,14 +19,15 @@ public class PersonInfoLastNameService implements IPersonInfoLastName {
     @Autowired
     private IPerson personService;
     @Autowired
-    private ModelMapper modelMapper;
-    @Autowired
     private IMedicalRecord recordService;
     @Autowired
     private IChildAlert childAlertService;
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Override
     public List<PersonInfoLastNameDto> getPersonInfoLastName(String lastName) {
+        // TODO Ajout des exceptoins
         List<Person> persons = personService.findPersonsByLastName(lastName);
 
         List<MedicalRecord> records = recordService.findMedicalRecordByLastName(persons);

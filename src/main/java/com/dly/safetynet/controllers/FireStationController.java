@@ -5,13 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 @RequestMapping("/firestation")
 public class FireStationController {
     @Autowired
     private IFireStation fireStationService;
-
 
     /**
      * http://localhost:8081/firestation?stationNumber=<station_number>

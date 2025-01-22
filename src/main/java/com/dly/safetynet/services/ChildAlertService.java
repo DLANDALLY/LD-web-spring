@@ -26,12 +26,6 @@ public class ChildAlertService implements IChildAlert {
     @Autowired
     private ModelMapper modelMapper;
 
-    /**
-     * http://localhost:8081/childAlert?address=892 Downing Ct
-     * Cette url doit retourner une liste d'enfants (tout individu âgé de 18 ans ou moins) habitant à cette adresse.
-     * La liste doit comprendre le prénom et le nom de famille de chaque enfant, son âge et une liste des autres
-     * membres du foyer. S'il n'y a pas d'enfant, cette url peut renvoyer une chaîne vide.
-     */
     @Override
     public ChildAlertDto getChildAlert(String address){
         if (address == null || address.isBlank()) throw new IllegalArgumentException("Address cannot be blank");
@@ -96,7 +90,4 @@ public class ChildAlertService implements IChildAlert {
                     return child;
                 }).collect(Collectors.toList());
     }
-
-
-
 }

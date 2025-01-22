@@ -1,6 +1,5 @@
 package com.dly.safetynet.dto.personInfolastName;
 
-
 import java.util.List;
 
 public class PersonInfoLastNameDto {

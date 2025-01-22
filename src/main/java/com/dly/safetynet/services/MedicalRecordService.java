@@ -13,10 +13,14 @@ import java.util.List;
 public class MedicalRecordService implements IMedicalRecord {
     @Autowired
     private JsonDataService jsonData;
+
+    public List<MedicalRecord> findAllMedicalRecords(){
+        return jsonData.getMedicalRecords();
+    }
     @Override
     public List<MedicalRecord> findMedicalRecordByFirstNameAndLastName(List<PersonDto> persons) {
          return persons.stream()
-                 .map(person -> jsonData.getMedicalRecords().stream()
+                 .map(person -> findAllMedicalRecords().stream()
                          .filter(record -> record.getFirstName().equals(person.getFirstName()) &&
                                  record.getLastName().equals(person.getLastName()))
                          .findFirst()
@@ -28,7 +32,7 @@ public class MedicalRecordService implements IMedicalRecord {
     @Override
     public List<MedicalRecord> findMedicalRecordByLastName(List<Person> persons) {
         return persons.stream()
-                .map(person -> jsonData.getMedicalRecords().stream()
+                .map(person -> findAllMedicalRecords().stream()
                         .filter(record -> record.getFirstName().equals(person.getFirstName()) &&
                                 record.getLastName().equals(person.getLastName()))
                         .findFirst()

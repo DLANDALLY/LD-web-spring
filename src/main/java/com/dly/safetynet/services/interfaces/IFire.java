@@ -1,5 +1,7 @@
 package com.dly.safetynet.services.interfaces;
 
+import com.dly.safetynet.dto.fire.FireDto;
+
 public interface IFire {
-    Object getFireAddress(String address);
+    FireDto getFireAddress(String address);
 }

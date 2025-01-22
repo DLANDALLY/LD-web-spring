@@ -1,5 +1,7 @@
 package com.dly.safetynet.services.interfaces;
 
+import java.util.List;
+
 public interface ICommunityEmail {
-    Object getCommunityEmailByCity(String city);
+    List<String> getCommunityEmailByCity(String city);
 }

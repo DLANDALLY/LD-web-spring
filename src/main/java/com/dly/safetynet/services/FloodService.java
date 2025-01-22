@@ -43,11 +43,8 @@ public class FloodService implements IFlood {
      */
     @Override
     public FloodStationDto getFloodStations(List<String> stationNumbers) {
-        // Liste des address des station
-        Set<String> address = stationNumbers.stream()
-                .map(s -> fireStationService.findAdresses(s))
-                .flatMap(List::stream)
-                .collect(Collectors.toSet());
+        // TODO Ajout des exceptions
+        Set<String> address = getAdresses(stationNumbers);
 
         List<PersonDto> persons = fireStationService.getPersonsDto(address);
 
@@ -58,6 +55,13 @@ public class FloodService implements IFlood {
         List<HouseholdServedDto> householdServedDtos = getHouseholdServedDtos(address, members);
 
         return new FloodStationDto(householdServedDtos);
+    }
+
+    private Set<String> getAdresses(List<String> stationNumbers){
+        return stationNumbers.stream()
+                .map(s -> fireStationService.findAdresses(s))
+                .flatMap(List::stream)
+                .collect(Collectors.toSet());
     }
 
     private List<HouseholdMember> getHouseholdMembers(List<PersonDto> persons, List<MedicalRecord> records) {

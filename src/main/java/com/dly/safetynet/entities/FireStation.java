@@ -2,7 +2,6 @@ package com.dly.safetynet.entities;
 
 import lombok.*;
 
-
 @AllArgsConstructor
 @NoArgsConstructor
 public class FireStation {
