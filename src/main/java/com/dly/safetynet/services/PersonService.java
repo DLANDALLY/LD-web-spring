@@ -18,10 +18,14 @@ public class PersonService implements IPerson {
     @Autowired
     private JsonDataService jsonData;
 
+    @Override
+    public List<Person> findAllPersons() {
+        return jsonData.getPersons();
+    }
 
     @Override
     public List<PersonDto> findPersonsDtoByAddress(String address) {
-        return jsonData.getPersons()
+        return findAllPersons()
                 .stream()
                 .filter(p -> p.getAddress().equals(address))
                 .map(p -> modelMapper.map(p, PersonDto.class))
@@ -30,10 +34,19 @@ public class PersonService implements IPerson {
 
     @Override
     public List<Person> findPersonsByLastName(String lastName) {
-        return jsonData.getPersons()
+        return findAllPersons()
                 .stream()
                 .filter(p -> p.getLastName().equals(lastName))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<String> findEmailByCity(String city) {
+        return findAllPersons().stream()
+                .filter(p -> p.getCity().equals(city))
+                .map(person -> person.getEmail())
+                .collect(Collectors.toList());
+    }
+
 
 }

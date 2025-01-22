@@ -30,17 +30,4 @@ public class FireStationController {
             return ResponseEntity.badRequest().body(iae.getMessage());
         }
     }
-
-
-
-
-//     /**
-//     * http://localhost:8080/communityEmail?city=<city>
-//     * Cette url doit retourner les adresses mail de tous les habitants de la ville.
-//     */
-//    @GetMapping("/firestation/{stationNumber}=")
-//    public void getFireStationById(@PathVariable() Long stationNumber){
-//        fireStationRepository.findById(stationNumber);
-//    }
-
 }
