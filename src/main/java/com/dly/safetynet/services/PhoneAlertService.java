@@ -41,7 +41,7 @@ public class PhoneAlertService implements IPhoneAlert {
         FireStation fireStation = getFireStation(fireStations, firestationNumber);
         if(fireStation == null) throw new IllegalStateException("The fire station is not found");
 
-        List<PersonDto> personDtos = personService.findPersonByAddress(fireStation.getAddress());
+        List<PersonDto> personDtos = personService.findPersonsDtoByAddress(fireStation.getAddress());
         if(personDtos.isEmpty()) throw new IllegalStateException("No residents are covered by this station number");
 
         List<PhoneAlertDto> phonesAlert = getPhoneAlert(personDtos);

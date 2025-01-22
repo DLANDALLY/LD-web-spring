@@ -36,7 +36,7 @@ public class ChildAlertService implements IChildAlert {
     public ChildAlertDto getChildAlert(String address){
         if (address == null || address.isBlank()) throw new IllegalArgumentException("Address cannot be blank");
 
-        List<PersonDto> persons = personService.findPersonByAddress(address);
+        List<PersonDto> persons = personService.findPersonsDtoByAddress(address);
         if (persons.isEmpty()) throw new IllegalArgumentException("No one lives at this address " + address);
 
         //Récupérer les enfants de cette adresse

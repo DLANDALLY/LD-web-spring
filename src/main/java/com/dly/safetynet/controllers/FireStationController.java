@@ -32,12 +32,8 @@ public class FireStationController {
     }
 
 
-//     /**
-//     * http://localhost:8080/personInfolastName=<lastName>
-//     * Cette url doit retourner le nom, l'adresse, l'âge, l'adresse mail et les antécédents médicaux (médicaments,
-//      * posologie et allergies) de chaque habitant. Si plusieurs personnes portent le même nom, elles doivent toutes
-//      * apparaître.
-//      */
+
+
 //     /**
 //     * http://localhost:8080/communityEmail?city=<city>
 //     * Cette url doit retourner les adresses mail de tous les habitants de la ville.

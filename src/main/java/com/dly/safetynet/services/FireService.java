@@ -40,7 +40,7 @@ public class FireService implements IFire {
         if (address.isEmpty() || address.isBlank()) throw new IllegalArgumentException("Address must not be empty");
 
         //Liste des personne vivant à l'adresse données
-        List<PersonDto> personsDto = personService.findPersonByAddress(address);
+        List<PersonDto> personsDto = personService.findPersonsDtoByAddress(address);
         if (personsDto.isEmpty()) throw new IllegalArgumentException("No one lives at this address " + address);
 
         //Dossier médical des personnes
