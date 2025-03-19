@@ -9,7 +9,7 @@ import java.util.List;
 public interface IChildAlert {
     ChildAlertDto getChildAlert(String address);
 
-    List<ChildDto> getAgePerson(List<MedicalRecord> medicalrecords);
+    //List<ChildDto> getAgePerson(List<MedicalRecord> medicalrecords);
 
     int calculateAge(String birthDay);
 }
