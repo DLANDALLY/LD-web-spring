@@ -18,7 +18,7 @@ public class PersonInfoLastNameController {
      * apparaître.
      */
     @GetMapping
-    public ResponseEntity<?> getPersonInfoLastName(@RequestParam("personInfolastName") String personInfolastName){
+    public ResponseEntity<?> getPersonInfoLastName(@RequestParam String personInfolastName){
         try {
             return ResponseEntity.ok(personInfoService.getPersonInfoLastName(personInfolastName));
         } catch (IllegalArgumentException iae){

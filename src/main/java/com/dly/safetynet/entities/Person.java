@@ -1,5 +1,7 @@
 package com.dly.safetynet.entities;
 
+//TODO : A voir pour ajouter une annotation
+
 public class Person {
     private Long id;
     private String firstName;

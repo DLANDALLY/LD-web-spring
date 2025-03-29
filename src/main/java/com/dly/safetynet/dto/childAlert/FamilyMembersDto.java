@@ -38,3 +38,7 @@ public class FamilyMembersDto {
         this.age = age;
     }
 }
+
+//TODO : attribut redondant / faire de l'heritage
+//TODO : VOire dans tous les DTO toute rendondance
+//TODO :
