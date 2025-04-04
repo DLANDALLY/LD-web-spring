@@ -4,7 +4,6 @@ import com.dly.safetynet.dto.PersonDto;
 import com.dly.safetynet.dto.floodStation.FloodStationDto;
 import com.dly.safetynet.dto.floodStation.HouseholdMember;
 import com.dly.safetynet.dto.floodStation.HouseholdServedDto;
-import com.dly.safetynet.entities.FireStation;
 import com.dly.safetynet.entities.MedicalRecord;
 import com.dly.safetynet.services.interfaces.IChildAlert;
 import com.dly.safetynet.services.interfaces.IFireStation;
@@ -59,7 +58,7 @@ public class FloodService implements IFlood {
 
     private Set<String> getAdresses(List<String> stationNumbers){
         return stationNumbers.stream()
-                .map(s -> fireStationService.findAdresses(s))
+                .map(s -> fireStationService.findAddress(s))
                 .flatMap(List::stream)
                 .collect(Collectors.toSet());
     }

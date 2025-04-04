@@ -3,6 +3,7 @@ package com.dly.safetynet.services;
 import com.dly.safetynet.dto.PersonDto;
 import com.dly.safetynet.dto.fire.FireDto;
 import com.dly.safetynet.dto.fire.PersonFireDto;
+import com.dly.safetynet.entities.FireStation;
 import com.dly.safetynet.entities.MedicalRecord;
 import com.dly.safetynet.services.interfaces.*;
 import org.modelmapper.ModelMapper;

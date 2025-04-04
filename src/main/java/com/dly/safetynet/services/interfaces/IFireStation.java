@@ -13,7 +13,7 @@ public interface IFireStation {
 
     FireStationResponse personCoverageByFireStation(String station);
 
-    List<String> findAdresses(String station);
+    List<String> findAddress(String station);
 
     FireStation findFireStationByAddress(String address);
 

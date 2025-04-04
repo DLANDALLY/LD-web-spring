@@ -1,13 +1,19 @@
 package com.dly.safetynet.entities;
 
-import lombok.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
 public class FireStation {
     private Long id;
     private String address;
     private String station;
+
+    public FireStation() {
+    }
+
+    public FireStation(Long id, String address, String station) {
+        this.id = id;
+        this.address = address;
+        this.station = station;
+    }
 
     public Long getId() {
         return id;

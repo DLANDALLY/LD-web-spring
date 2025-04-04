@@ -27,7 +27,7 @@ class CommunityEmailServiceTest {
     }
 
     @Test
-    void getCommunityEmailByCity() {
+    void shouldGetCommunityEmailByCity() {
         // Given
         String city = "Culver";
         when(personService.findEmailByCity(city)).thenReturn(emails());

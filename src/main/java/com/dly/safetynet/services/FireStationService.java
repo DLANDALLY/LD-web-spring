@@ -34,10 +34,10 @@ public class FireStationService implements IFireStation {
     public FireStationResponse personCoverageByFireStation(String station) {
         if (station == null || station.isBlank()) throw new IllegalArgumentException("Station number cannot be null or blank");
 
-        List<String> addresses = findAdresses(station);
-        if (addresses.isEmpty()) throw new IllegalArgumentException("No address is covered by this station number");
+        List<String> address = findAddress(station);
+        if (address.isEmpty()) throw new IllegalArgumentException("No address is covered by this station number");
 
-        List<PersonDto> persons = getPersonsDto(addresses);
+        List<PersonDto> persons = getPersonsDto(address);
         if (persons.isEmpty()) throw new IllegalArgumentException("No residents are covered by this station number");
 
         List<MedicalRecord> birthdays = getBirthdays(persons);
@@ -50,7 +50,7 @@ public class FireStationService implements IFireStation {
     }
 
     @Override
-    public List<String> findAdresses(String station) {
+    public List<String> findAddress(String station) {
         return findAllFireStations().stream()
                .filter(fs -> fs.getStation().equals(station))
                .map(FireStation::getAddress)
