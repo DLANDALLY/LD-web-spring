@@ -6,6 +6,7 @@ public class PersonDto {
     private String address;
     private String phone;
 
+<<<<<<< Updated upstream
     public PersonDto() {
     }
 
