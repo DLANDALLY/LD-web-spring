@@ -29,7 +29,7 @@ public class FireService implements IFire {
 
     @Override
     public FireDto getFireAddress(String address) {
-        if (address.isEmpty() || address.isBlank()) throw new IllegalArgumentException("Address must not be empty");
+        if (address.isBlank()) throw new IllegalArgumentException("Address must not be empty");
 
         List<PersonDto> personsDto = personService.findPersonsDtoByAddress(address);
         if (personsDto.isEmpty()) throw new IllegalArgumentException("No one lives at this address " + address);

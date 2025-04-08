@@ -59,12 +59,14 @@ class FireServiceTest {
     @Disabled
     void shouldGetFireAddress() {
         //Given
+        String address = "1509 Culver St";
+
         MedicalRecord m1 = new MedicalRecord();
         m1.setFirstName("John");
         m1.setLastName("Doe");
         m1.setBirthdate("1990-01-01");
 
-        String address = "1509 Culver St";
+        FireStation fireStation = new FireStation(1l, address, "3");
 
         when(personService.findPersonsDtoByAddress(address)).thenReturn(getPersonsDto());
         when(recordService.findMedicalRecordByFirstNameAndLastName(getPersonsDto())).thenReturn(getMedicalRecords());
@@ -73,11 +75,10 @@ class FireServiceTest {
             PersonFireDto personFireDto = new PersonFireDto();
             personFireDto.setFirstName(record.getFirstName());
             personFireDto.setAge(35);
-            return personFireDto;
-        });
+            return personFireDto;});
         when(childAlertService.calculateAge(m1.getBirthdate())).thenReturn(35);
-        when(Integer.parseInt(fireStationService.findFireStationByAddress(address).getStation()))
-                .thenReturn(3);
+        when(fireStationService.findFireStationByAddress(address)).thenReturn(fireStation);
+        when(Integer.parseInt(fireStation.getStation())).thenReturn(3);
 
         //When
         FireDto result = fireService.getFireAddress(address);
