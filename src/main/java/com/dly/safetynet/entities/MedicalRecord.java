@@ -1,11 +1,12 @@
 package com.dly.safetynet.entities;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
+@Setter
+@Getter
 public class MedicalRecord {
     private Long id;
     private String firstName;
@@ -14,51 +15,14 @@ public class MedicalRecord {
     private List<String> medications;
     private List<String> allergies;
 
-    public Long getId() {
-        return id;
+    public MedicalRecord() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
+    public MedicalRecord(String firstName, String lastName, String birthdate, List<String> medications, List<String> allergies) {
         this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getBirthdate() {
-        return birthdate;
-    }
-
-    public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
-    }
-
-    public List<String> getMedications() {
-        return medications;
-    }
-
-    public void setMedications(List<String> medications) {
         this.medications = medications;
-    }
-
-    public List<String> getAllergies() {
-        return allergies;
-    }
-
-    public void setAllergies(List<String> allergies) {
         this.allergies = allergies;
     }
 

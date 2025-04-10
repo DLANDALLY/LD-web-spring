@@ -44,21 +44,9 @@ class ChildAlertServiceTest {
     @BeforeEach
     void setUp() {
         childDto = new ChildDto("John", "Doe", 8, families());
-
-        // Création d'une fause PersonDto
-        personDto = new PersonDto();
-        personDto.setFirstName("John");
-        personDto.setLastName("Doe");
-        personDto.setAddress("1509 Culver St");
-        personDto.setPhone("841-874-6512");
-
-        // Création d'un faux MedicalRecord
-        medicalRecord = new MedicalRecord();
-        medicalRecord.setFirstName("John");
-        medicalRecord.setLastName("Doe");
-        medicalRecord.setBirthdate("05/15/2017");
-        medicalRecord.setMedications(Arrays.asList("aznol:350mg", "hydrapermazol:100mg"));
-        medicalRecord.setAllergies(Arrays.asList("nillacilan"));
+        personDto = new PersonDto("John", "Doe", "1509 Culver St", "841-874-6512");
+        medicalRecord = new MedicalRecord("John", "Doe", "05/15/2017",
+                Arrays.asList("aznol:350mg", "hydrapermazol:100mg"), Arrays.asList("nillacilan"));
     }
 
     @Test

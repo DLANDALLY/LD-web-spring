@@ -17,6 +17,7 @@ public class MedicalRecordService implements IMedicalRecord {
     public List<MedicalRecord> findAllMedicalRecords(){
         return jsonData.getMedicalRecords();
     }
+
     @Override
     public List<MedicalRecord> findMedicalRecordByFirstNameAndLastName(List<PersonDto> persons) {
          return persons.stream()

@@ -1,7 +1,5 @@
 package com.dly.safetynet.entities;
 
-//TODO : A voir pour ajouter une annotation
-
 public class Person {
     private Long id;
     private String firstName;
@@ -17,6 +15,16 @@ public class Person {
 
     public Person(Long id, String firstName, String lastName, String address, String city, String zip, String phone, String email) {
         this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.city = city;
+        this.zip = zip;
+        this.phone = phone;
+        this.email = email;
+    }
+
+    public Person(String firstName, String lastName, String address, String city, String zip, String phone, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;

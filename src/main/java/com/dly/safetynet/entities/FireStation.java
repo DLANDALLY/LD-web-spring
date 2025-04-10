@@ -15,6 +15,11 @@ public class FireStation {
         this.station = station;
     }
 
+    public FireStation(String address, String station) {
+        this.address = address;
+        this.station = station;
+    }
+
     public Long getId() {
         return id;
     }
