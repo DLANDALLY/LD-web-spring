@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
 public class JsonDataService {
     private List<Object> listeners = new ArrayList<>();
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private final String filePath = "src/main/resources/data.json"; // TODO ajout de variable d'environnement
+    private final File filePath = new File("src/main/resources/data.json");
     private List<Person> persons;
     private List<FireStation> firestations;
     private List<MedicalRecord> medicalRecords;
@@ -23,15 +24,38 @@ public class JsonDataService {
 
     public void loadDataFromJson() {
         try {
-            JsonDataWrapper dataWrapper = objectMapper.readValue(
-                    new File(filePath), JsonDataWrapper.class);
+            JsonDataWrapper dataWrapper = objectMapper.readValue(filePath, JsonDataWrapper.class);
             persons = dataWrapper.getPersons();
             firestations = dataWrapper.getFirestations();
             medicalRecords = dataWrapper.getMedicalrecords();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    public void writeDataToJson(List<?> objects) {
+        try {
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(filePath, objects);
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //TODO probleme lorsque jaoute ou supprime des doonnées sur le fichier Json
+//    public void writeData(DataStore dataStore) {
+//        try {
+//            objectMapper.writerWithDefaultPrettyPrinter().writeValue(file, dataStore);
+//        } catch (IOException e) {
+//            throw new RuntimeException("Erreur écriture JSON", e);
+//        }
+//    }
+//
+//    public void addPerson(Person newPerson) {
+//        DataStore data = readData();
+//        List<Person> persons = data.getPersons();
+//        persons.add(newPerson);
+//        writeData(data);
+//    }
 
     public List<Person> getPersons() {
         return persons;

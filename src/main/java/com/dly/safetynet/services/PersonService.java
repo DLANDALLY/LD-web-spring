@@ -2,12 +2,16 @@ package com.dly.safetynet.services;
 
 import com.dly.safetynet.dto.PersonDto;
 import com.dly.safetynet.entities.Person;
+import com.dly.safetynet.form.PersonForm;
 import com.dly.safetynet.services.interfaces.IPerson;
+import com.dly.safetynet.services.utils.PersonUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,7 +24,12 @@ public class PersonService implements IPerson {
 
     @Override
     public List<Person> findAllPersons() {
-        return jsonData.getPersons();
+        long idCounter = 1;
+        List<Person> persons = jsonData.getPersons();
+        for (Person person : persons) {
+            person.setId(idCounter++);
+        }
+        return persons;
     }
 
     @Override
@@ -48,5 +57,47 @@ public class PersonService implements IPerson {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public void creatPerson(PersonForm personForm) throws IOException {
+        List<Person> persons = findAllPersons();
+        Person person = personMapper(personForm);
+        boolean personExist = PersonUtils.checkPersonExists(person, persons);
+        if (personExist) throw new IllegalArgumentException("Person already exists");
 
+        persons.add(person);
+        jsonData.writeDataToJson(persons);
+    }
+
+    @Override
+    public void updatePerson(PersonForm personForm) throws IOException {
+        List<Person> persons = findAllPersons();
+        Person person = personMapper(personForm);
+        Person foundPerson = PersonUtils.findExactPerson(person, persons);
+        boolean samePerson = PersonUtils.samePerson(person, persons);
+
+        if (foundPerson == null) throw new IllegalArgumentException("Person not found");
+        if (samePerson) throw new IllegalArgumentException("Oops, no changes received !");
+
+        for (int i = 0; i < persons.size(); i++) {
+            if (persons.get(i).getClass().equals(foundPerson.getClass()))
+                persons.set(i, person);
+        }
+        jsonData.writeDataToJson(persons);
+    }
+
+    @Override
+    public String deletePerson(Person person) throws IOException {
+        List<Person> persons = findAllPersons();
+        Person foundPerson = PersonUtils.findExactPerson(person, persons);
+        if (foundPerson == null) throw new IllegalArgumentException("Person not found");
+
+        persons.removeIf(p -> p.equals(foundPerson));
+        jsonData.writeDataToJson(persons);
+        return "The person has been successfully deleted";
+    }
+
+
+    private Person personMapper(PersonForm personForm) {
+        return  modelMapper.map(personForm, Person.class);
+    }
 }

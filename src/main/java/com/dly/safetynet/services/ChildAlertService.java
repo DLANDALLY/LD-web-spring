@@ -29,7 +29,7 @@ public class ChildAlertService implements IChildAlert {
 
     @Override
     public ChildAlertDto getChildAlert(String address){
-        if (address == null || address.isBlank()) throw new IllegalArgumentException("Address cannot be blank");
+        if (address.isBlank()) throw new IllegalArgumentException("Address cannot be blank");
 
         List<PersonDto> persons = personService.findPersonsDtoByAddress(address);
         if (persons.isEmpty()) throw new NoSuchElementException("No one lives at this address " + address);

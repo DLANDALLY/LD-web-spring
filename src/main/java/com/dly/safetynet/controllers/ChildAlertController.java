@@ -1,6 +1,8 @@
 package com.dly.safetynet.controllers;
 
 import com.dly.safetynet.services.interfaces.IChildAlert;
+import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
