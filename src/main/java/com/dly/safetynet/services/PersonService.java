@@ -65,7 +65,7 @@ public class PersonService implements IPerson {
         if (personExist) throw new IllegalArgumentException("Person already exists");
 
         persons.add(person);
-        jsonData.writeDataToJson(persons);
+        jsonData.writeDataToJson(person);
     }
 
     @Override
@@ -79,10 +79,10 @@ public class PersonService implements IPerson {
         if (samePerson) throw new IllegalArgumentException("Oops, no changes received !");
 
         for (int i = 0; i < persons.size(); i++) {
-            if (persons.get(i).getClass().equals(foundPerson.getClass()))
+            if (persons.get(i).equals(foundPerson))
                 persons.set(i, person);
         }
-        jsonData.writeDataToJson(persons);
+        jsonData.updateDataToJson(persons);
     }
 
     @Override
@@ -92,7 +92,7 @@ public class PersonService implements IPerson {
         if (foundPerson == null) throw new IllegalArgumentException("Person not found");
 
         persons.removeIf(p -> p.equals(foundPerson));
-        jsonData.writeDataToJson(persons);
+        jsonData.updateDataToJson(persons);
         return "The person has been successfully deleted";
     }
 

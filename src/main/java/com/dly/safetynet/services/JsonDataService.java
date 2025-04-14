@@ -5,6 +5,7 @@ import com.dly.safetynet.entities.JsonDataWrapper;
 import com.dly.safetynet.entities.MedicalRecord;
 import com.dly.safetynet.entities.Person;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Getter;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -17,8 +18,11 @@ public class JsonDataService {
     private List<Object> listeners = new ArrayList<>();
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final File filePath = new File("src/main/resources/data.json");
+    @Getter
     private List<Person> persons;
+    @Getter
     private List<FireStation> firestations;
+    @Getter
     private List<MedicalRecord> medicalRecords;
 
 
@@ -33,39 +37,34 @@ public class JsonDataService {
         }
     }
 
-    public void writeDataToJson(List<?> objects) {
+    public void writeDataToJson(Object object) {
         try {
-            objectMapper.writerWithDefaultPrettyPrinter().writeValue(filePath, objects);
+            JsonDataWrapper dataWrapper = objectMapper.readValue(filePath, JsonDataWrapper.class);
+
+            var typeClass = object.getClass();
+            if (typeClass.equals(Person.class)) dataWrapper.getPersons().add((Person) object);
+            else if (typeClass.equals(FireStation.class)) dataWrapper.getFirestations().add((FireStation) object);
+            else if (typeClass.equals(MedicalRecord.class)) dataWrapper.getMedicalrecords().add((MedicalRecord) object);
+
+        objectMapper.writerWithDefaultPrettyPrinter().writeValue(filePath, dataWrapper);
         }catch (IOException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
     }
 
-    //TODO probleme lorsque jaoute ou supprime des doonnées sur le fichier Json
-//    public void writeData(DataStore dataStore) {
-//        try {
-//            objectMapper.writerWithDefaultPrettyPrinter().writeValue(file, dataStore);
-//        } catch (IOException e) {
-//            throw new RuntimeException("Erreur écriture JSON", e);
-//        }
-//    }
-//
-//    public void addPerson(Person newPerson) {
-//        DataStore data = readData();
-//        List<Person> persons = data.getPersons();
-//        persons.add(newPerson);
-//        writeData(data);
-//    }
+    public void updateDataToJson(List<?> objects) {
+        try {
+            JsonDataWrapper dataWrapper = objectMapper.readValue(filePath, JsonDataWrapper.class);
+            var typeClass = objects.getFirst().getClass();
 
-    public List<Person> getPersons() {
-        return persons;
+            if (typeClass.equals(Person.class)) dataWrapper.setPersons((List<Person>) objects);
+            else if (typeClass.equals(FireStation.class)) dataWrapper.setFirestations((List<FireStation>) objects);
+            else if (typeClass.equals(MedicalRecord.class)) dataWrapper.setMedicalrecords((List<MedicalRecord>) objects);
+
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(filePath, dataWrapper);
+        }catch (IOException e) {
+            e.getMessage();
+        }
     }
 
-    public List<FireStation> getFirestations() {
-        return firestations;
-    }
-
-    public List<MedicalRecord> getMedicalRecords() {
-        return medicalRecords;
-    }
 }
