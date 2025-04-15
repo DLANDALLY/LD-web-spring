@@ -1,7 +1,12 @@
 package com.dly.safetynet.dto.fire;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 
+@Setter
+@Getter
 public class FireDto {
     private String address;
     private List<PersonFireDto> personsFire;
@@ -13,30 +18,6 @@ public class FireDto {
     public FireDto(String address, List<PersonFireDto> personsFire, int stationNumber) {
         this.address = address;
         this.personsFire = personsFire;
-        this.stationNumber = stationNumber;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public List<PersonFireDto> getPersonsFire() {
-        return personsFire;
-    }
-
-    public void setPersonsFire(List<PersonFireDto> personsFire) {
-        this.personsFire = personsFire;
-    }
-
-    public int getStationNumber() {
-        return stationNumber;
-    }
-
-    public void setStationNumber(int stationNumber) {
         this.stationNumber = stationNumber;
     }
 

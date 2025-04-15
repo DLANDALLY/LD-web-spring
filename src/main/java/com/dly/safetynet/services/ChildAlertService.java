@@ -53,7 +53,6 @@ public class ChildAlertService implements IChildAlert {
         return new ChildAlertDto(household);
     }
 
-
     private List<ChildDto> getAgePerson(List<MedicalRecord> medicalrecords) {
         return medicalrecords.stream()
                 .map(m -> {
@@ -78,7 +77,7 @@ public class ChildAlertService implements IChildAlert {
 
     private List<ChildDto> getHousehold(List<ChildDto> children, List<ChildDto> agePerson){
         return children.stream()
-                .map(child -> {
+                .peek(child -> {
                     List<FamilyMembersDto> families = agePerson.stream()
                             .filter(person -> person.getLastName().equals(child.getLastName()))
                             .map(p -> modelMapper.map(p, FamilyMembersDto.class))
@@ -87,7 +86,6 @@ public class ChildAlertService implements IChildAlert {
                             f.getLastName().equals(child.getLastName()) &&
                             f.getAge() == child.getAge());
                     child.setFamilyMembers(families);
-                    return child;
                 }).collect(Collectors.toList());
     }
 }

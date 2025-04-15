@@ -3,7 +3,6 @@ package com.dly.safetynet.services;
 import com.dly.safetynet.dto.PersonDto;
 import com.dly.safetynet.dto.fire.FireDto;
 import com.dly.safetynet.dto.fire.PersonFireDto;
-import com.dly.safetynet.entities.FireStation;
 import com.dly.safetynet.entities.MedicalRecord;
 import com.dly.safetynet.services.interfaces.*;
 import org.modelmapper.ModelMapper;
@@ -37,13 +36,13 @@ public class FireService implements IFire {
         List<MedicalRecord> records = recordService.findMedicalRecordByFirstNameAndLastName(personsDto);
         if (records.isEmpty()) throw new IllegalStateException("No medical records found");
 
-        List<PersonFireDto> persons = getPersonsFireDto(records);
-        if (persons.isEmpty()) throw new IllegalStateException("No persons found");
+        List<PersonFireDto> personFireDtos = getPersonsFireDto(records);
+        if (personFireDtos.isEmpty()) throw new IllegalStateException("No persons found");
 
         int stationNumber = getStationNumber(address);
         if (stationNumber == 0) throw new IllegalStateException("No fire station found");
 
-        return new FireDto(address,persons,stationNumber);
+        return new FireDto(address, personFireDtos, stationNumber);
     }
 
     private List<PersonFireDto> getPersonsFireDto(List<MedicalRecord> records) {
@@ -61,6 +60,4 @@ public class FireService implements IFire {
                 .findFireStationByAddress(address)
                 .getStation());
     }
-
-    //TODO : Bug - numero de telephone apparait comme null
 }

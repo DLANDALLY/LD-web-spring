@@ -25,7 +25,7 @@ public class FloodController {
     @GetMapping("/stations")
     public ResponseEntity<?> getFloodStations(@RequestParam List<String> stations){
         try {
-            return ResponseEntity.ok(floodService.getFloodStations(stations)); //ResponseEntity.ok();
+            return ResponseEntity.ok(floodService.getFloodStations(stations));
         } catch (IllegalArgumentException iae){
             return ResponseEntity.badRequest().body(iae.getMessage());
         }

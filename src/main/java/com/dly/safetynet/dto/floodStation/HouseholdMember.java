@@ -1,7 +1,12 @@
 package com.dly.safetynet.dto.floodStation;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 
+@Setter
+@Getter
 public class HouseholdMember {
     private String fullName;
     private String phone;
@@ -19,54 +24,6 @@ public class HouseholdMember {
         this.age = age;
         this.medications = medications;
         this.allergies = allergies;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public List<String> getMedications() {
-        return medications;
-    }
-
-    public void setMedications(List<String> medications) {
-        this.medications = medications;
-    }
-
-    public List<String> getAllergies() {
-        return allergies;
-    }
-
-    public void setAllergies(List<String> allergies) {
-        this.allergies = allergies;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     @Override

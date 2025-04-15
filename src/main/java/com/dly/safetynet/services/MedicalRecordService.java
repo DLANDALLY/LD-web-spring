@@ -4,7 +4,6 @@ import com.dly.safetynet.dto.PersonDto;
 import com.dly.safetynet.entities.MedicalRecord;
 import com.dly.safetynet.entities.Person;
 import com.dly.safetynet.form.MedicalRecordForm;
-import com.dly.safetynet.form.PersonForm;
 import com.dly.safetynet.services.interfaces.IMedicalRecord;
 import com.dly.safetynet.services.interfaces.IPerson;
 import com.dly.safetynet.services.utils.MedicalRecordUtils;
@@ -59,7 +58,6 @@ public class MedicalRecordService implements IMedicalRecord {
         List<Person> persons = personService.findAllPersons();
         MedicalRecord medicalRecord = medicalRecordMapper(medicalRecordForm);
 
-        //TODO: verifier sur la liste person
         boolean personFound = PersonUtils.checkPersonExists(medicalRecord, persons);
         if (!personFound) throw new IllegalArgumentException("Creat a Person before creat his medical record");
 

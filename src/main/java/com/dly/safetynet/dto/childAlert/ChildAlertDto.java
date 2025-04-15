@@ -1,7 +1,12 @@
 package com.dly.safetynet.dto.childAlert;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 
+@Setter
+@Getter
 public class ChildAlertDto {
     private List<ChildDto> children;
 
@@ -12,11 +17,4 @@ public class ChildAlertDto {
         this.children = children;
     }
 
-    public List<ChildDto> getChildren() {
-        return children;
-    }
-
-    public void setChildren(List<ChildDto> children) {
-        this.children = children;
-    }
 }

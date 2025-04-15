@@ -42,7 +42,6 @@ public class PhoneAlertService implements IPhoneAlert {
         return phonesAlert;
     }
 
-
     private List<FireStation>  addId(List<FireStation> fireStations){
         for (int i = 0; i < fireStations.size(); i++){
             fireStations.get(i).setId(i+1L);

@@ -2,7 +2,6 @@ package com.dly.safetynet.services.utils;
 
 import com.dly.safetynet.entities.MedicalRecord;
 import com.dly.safetynet.entities.Person;
-import com.dly.safetynet.form.MedicalRecordForm;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -53,7 +52,6 @@ public class PersonUtils {
         return matcher.matches();
     }
 
-    //Verifie si le person son existe avant de creer son dossier medicazl
     public static boolean checkPersonExists(MedicalRecord medicalRecord, List<Person> allPersons) {
         return allPersons.stream()
                 .anyMatch(p ->

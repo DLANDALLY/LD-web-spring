@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class FireController {
     @Autowired
     private IFire fireService;
+
     /**
      * http://localhost:8081/fire?address=<address>
      * Cette url doit retourner la liste des habitants vivant à l’adresse donnée ainsi
@@ -21,14 +22,11 @@ public class FireController {
      * de chaque personne.
      */
     @GetMapping()
-    public ResponseEntity<?> getFireAddress(@RequestParam("address") String address){
+    public ResponseEntity<?> getFireAddress(@RequestParam String address){
         try {
             return ResponseEntity.ok(fireService.getFireAddress(address));
         }catch (IllegalArgumentException iae){
             return ResponseEntity.badRequest().body(iae.getMessage());
         }
     }
-
-    //TODO Probleme avec le parametre phone = null
-    //TODO Probleme de doublon avec houseHolds
 }

@@ -1,7 +1,12 @@
 package com.dly.safetynet.dto.floodStation;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 
+@Setter
+@Getter
 public class HouseholdServedDto {
     private String address;
     private List<HouseholdMember> houseHolds;
@@ -11,22 +16,6 @@ public class HouseholdServedDto {
 
     public HouseholdServedDto(String address, List<HouseholdMember> houseHolds) {
         this.address = address;
-        this.houseHolds = houseHolds;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public List<HouseholdMember> getHouseHolds() {
-        return houseHolds;
-    }
-
-    public void setHouseHolds(List<HouseholdMember> houseHolds) {
         this.houseHolds = houseHolds;
     }
 

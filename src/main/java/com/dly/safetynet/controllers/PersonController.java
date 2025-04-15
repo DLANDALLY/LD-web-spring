@@ -24,12 +24,12 @@ public class PersonController {
      * http://localhost:8081/person
      * Cet endpoint permettra d’effectuer les actions suivantes via Post/Put/Delete avec
      * HTTP :
-     * ● Ajouter une nouvelle personne
-     * ● Mettre à jour une personne existante (pour le moment, supposons que le
-     * prénom et le nom de famille ne changent pas, mais que les autres champs
-     * peuvent être modifiés)
-     * ● Supprimer une personne (utilisez une combinaison de prénom et de nom
-     * comme identificateur unique)
+     *      ● Ajouter une nouvelle personne
+     *      ● Mettre à jour une personne existante (pour le moment, supposons que le
+     *          prénom et le nom de famille ne changent pas, mais que les autres champs
+     *          peuvent être modifiés)
+     *      ● Supprimer une personne (utilisez une combinaison de prénom et de nom
+     *          comme identificateur unique)
      */
     @PostMapping
     public ResponseEntity<?> createPerson(@RequestBody PersonForm personForm, BindingResult result) {

@@ -9,9 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -96,7 +94,6 @@ public class PersonService implements IPerson {
         jsonData.updateDataToJson(persons);
         return "The person has been successfully deleted";
     }
-
 
     private Person personMapper(PersonForm personForm) {
         return  modelMapper.map(personForm, Person.class);

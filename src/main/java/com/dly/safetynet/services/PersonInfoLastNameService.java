@@ -7,7 +7,6 @@ import com.dly.safetynet.services.interfaces.IChildAlert;
 import com.dly.safetynet.services.interfaces.IMedicalRecord;
 import com.dly.safetynet.services.interfaces.IPerson;
 import com.dly.safetynet.services.interfaces.IPersonInfoLastName;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,19 +21,14 @@ public class PersonInfoLastNameService implements IPersonInfoLastName {
     private IMedicalRecord recordService;
     @Autowired
     private IChildAlert childAlertService;
-    @Autowired
-    private ModelMapper modelMapper;
 
     @Override
     public List<PersonInfoLastNameDto> getPersonInfoLastName(String lastName) {
-        // TODO Ajout des exceptoins
         List<Person> persons = personService.findPersonsByLastName(lastName);
 
         List<MedicalRecord> records = recordService.findMedicalRecordByLastName(persons);
 
-        List< PersonInfoLastNameDto> personsInfoLastName = getPersonsInfoLastName(persons, records);
-
-        return personsInfoLastName;
+        return getPersonsInfoLastName(persons, records);
     }
 
     private List<PersonInfoLastNameDto> getPersonsInfoLastName(List<Person> persons,List<MedicalRecord> records){

@@ -1,5 +1,10 @@
 package com.dly.safetynet.dto.childAlert;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class FamilyMembersDto {
     private String firstName;
     private String lastName;
@@ -14,31 +19,4 @@ public class FamilyMembersDto {
         this.age = age;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
 }
-
-//TODO : attribut redondant / faire de l'heritage
-//TODO : VOire dans tous les DTO toute rendondance
-//TODO :

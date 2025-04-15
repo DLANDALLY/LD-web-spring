@@ -34,11 +34,8 @@ public class FloodService implements IFlood {
      *          - le nom
      *          - le numéro de téléphone
      *          - l'âge des habitants
-     *          - faire figurer leurs antécédents médicaux
-     *              (médicaments, posologie et allergies)
+     *          - faire figurer leurs antécédents médicaux (médicaments, posologie et allergies)
      *              à côté de chaque nom
-     *
-     * @return
      */
     @Override
     public FloodStationDto getFloodStations(List<String> stationNumbers) {

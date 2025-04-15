@@ -1,8 +1,6 @@
 package com.dly.safetynet.controllers;
 
 import com.dly.safetynet.services.interfaces.IChildAlert;
-import lombok.extern.java.Log;
-import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +21,7 @@ public class ChildAlertController {
      * membres du foyer. S'il n'y a pas d'enfant, cette url peut renvoyer une chaîne vide.
      */
     @GetMapping()
-    public ResponseEntity<?> getChildAlert(@RequestParam("address")String address){
+    public ResponseEntity<?> getChildAlert(@RequestParam String address){
         try {
             return ResponseEntity.ok(childAlertService.getChildAlert(address).getChildren());
         }catch (IllegalArgumentException iae) {

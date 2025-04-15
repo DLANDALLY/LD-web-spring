@@ -4,19 +4,15 @@ import com.dly.safetynet.dto.FireStationResponse;
 import com.dly.safetynet.dto.PersonDto;
 import com.dly.safetynet.entities.FireStation;
 import com.dly.safetynet.entities.MedicalRecord;
-import com.dly.safetynet.entities.Person;
 import com.dly.safetynet.form.FireStationForm;
-import com.dly.safetynet.form.PersonForm;
 import com.dly.safetynet.services.interfaces.IFireStation;
 import com.dly.safetynet.services.interfaces.IMedicalRecord;
 import com.dly.safetynet.services.interfaces.IPerson;
 import com.dly.safetynet.services.utils.FireStationUtils;
-import com.dly.safetynet.services.utils.PersonUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -108,7 +104,7 @@ public class FireStationService implements IFireStation {
     }
 
     @Override
-    public void creatFireStation(FireStationForm fireStationForm) throws IOException {
+    public void creatFireStation(FireStationForm fireStationForm) {
         List<FireStation> fireStations = findAllFireStations();
         FireStation fireStation = fireStationMapper(fireStationForm);
         boolean personExist = FireStationUtils.checkFireStationExists(fireStation, fireStations);
@@ -120,7 +116,7 @@ public class FireStationService implements IFireStation {
     }
 
     @Override
-    public void updateFireStation(FireStationForm fireStationForm) throws IOException {
+    public void updateFireStation(FireStationForm fireStationForm) {
         List<FireStation> fireStations = findAllFireStations();
         FireStation fireStation = fireStationMapper(fireStationForm);
 
@@ -138,7 +134,7 @@ public class FireStationService implements IFireStation {
     }
 
     @Override
-    public String deleteFireStation(FireStation fireStation) throws IOException {
+    public String deleteFireStation(FireStation fireStation) {
         List<FireStation> fireStations = findAllFireStations();
         FireStation foundFireStation = FireStationUtils.findExactFireStation(fireStation, fireStations);
         if (foundFireStation == null) throw new IllegalArgumentException("FireStation not found");

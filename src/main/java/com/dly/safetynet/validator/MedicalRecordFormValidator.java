@@ -16,12 +16,6 @@ public class MedicalRecordFormValidator implements Validator {
         return MedicalRecordForm.class.equals(clazz);
     }
 
-    private String firstName;
-    private String lastName;
-    private String birthdate;
-    private List<String> medications;
-    private List<String> allergies;
-
     @Override
     public void validate(Object target, Errors errors) {
         MedicalRecordForm medicalRecordForm = (MedicalRecordForm) target;

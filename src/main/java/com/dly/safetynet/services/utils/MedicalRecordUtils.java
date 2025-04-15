@@ -1,7 +1,6 @@
 package com.dly.safetynet.services.utils;
 
 import com.dly.safetynet.entities.MedicalRecord;
-import com.dly.safetynet.entities.Person;
 
 import java.util.List;
 
@@ -15,7 +14,6 @@ public class MedicalRecordUtils {
                     m.getBirthdate().equals(medicalRecord.getBirthdate()));
     }
 
-    //TODO: Meme resultat
     public static boolean sameMedicalRecord(MedicalRecord medicalRecord, List<MedicalRecord> allMedicalRecords) {
         return allMedicalRecords.stream()
                 .anyMatch(m ->
