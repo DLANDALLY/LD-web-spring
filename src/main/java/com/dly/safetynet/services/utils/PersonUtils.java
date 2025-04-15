@@ -1,9 +1,6 @@
 package com.dly.safetynet.services.utils;
 
 import com.dly.safetynet.entities.Person;
-import com.dly.safetynet.form.PersonForm;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -35,14 +32,6 @@ public class PersonUtils {
                         p.getPhone().equals(person.getPhone()) &&
                         p.getEmail().equals(person.getEmail()));
     }
-
-    private String firstName;
-    private String lastName;
-    private String address;
-    private String city;
-    private String zip;
-    private String phone;
-    private String email;
 
     public static Person findExactPerson(Person person, List<Person> allPersons) {
         return allPersons.stream()

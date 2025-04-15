@@ -4,7 +4,9 @@ import com.dly.safetynet.dto.FireStationResponse;
 import com.dly.safetynet.dto.PersonDto;
 import com.dly.safetynet.entities.FireStation;
 import com.dly.safetynet.entities.MedicalRecord;
+import com.dly.safetynet.form.FireStationForm;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
@@ -26,4 +28,10 @@ public interface IFireStation {
     int getAdultCount(List<MedicalRecord> medicalRecords);
 
     boolean isOver18(String birthDate);
+
+    void creatFireStation(FireStationForm fireStationForm) throws IOException;
+
+    void updateFireStation(FireStationForm fireStationForm) throws IOException;
+
+    String deleteFireStation(FireStation fireStation) throws IOException;
 }
