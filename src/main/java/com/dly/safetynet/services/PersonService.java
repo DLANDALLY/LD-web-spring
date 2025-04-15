@@ -72,6 +72,7 @@ public class PersonService implements IPerson {
     public void updatePerson(PersonForm personForm) throws IOException {
         List<Person> persons = findAllPersons();
         Person person = personMapper(personForm);
+
         Person foundPerson = PersonUtils.findExactPerson(person, persons);
         boolean samePerson = PersonUtils.samePerson(person, persons);
 

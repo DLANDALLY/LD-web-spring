@@ -17,7 +17,7 @@ public class FireStationFormValidator implements Validator {
     public void validate(Object target, Errors errors) {
         FireStationForm fireStationForm = (FireStationForm) target;
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address", "NotEmpty.personForm.address", "Address is required");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "station", "NotEmpty.personForm.station", "Station is required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address", "NotEmpty.fireStationForm.address", "Address is required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "station", "NotEmpty.fireStationForm.station", "Station is required");
     }
 }

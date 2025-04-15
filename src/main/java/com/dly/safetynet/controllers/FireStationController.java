@@ -92,17 +92,4 @@ public class FireStationController {
                     .body(e.getMessage());
         }
     }
-
-
-
-     /**
-      *
-      * * http://localhost:8080/medicalRecord
-     * Cet endpoint permettra d’effectuer les actions suivantes via Post/Put/Delete HTTP :
-     *         ● Ajouter un dossier médical
-     * ● Mettre à jour un dossier médical existant (comme évoqué précédemment,
-     *                                              supposez que le prénom et le nom de famille ne changent pas)
-     * ● Supprimer un dossier médical (utilisez une combinaison de prénom et de nom
-     *         comme identificateur unique)
-     */
 }
