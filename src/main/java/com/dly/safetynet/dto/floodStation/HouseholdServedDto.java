@@ -13,18 +13,4 @@ public class HouseholdServedDto {
 
     public HouseholdServedDto() {
     }
-
-    public HouseholdServedDto(String address, List<HouseholdMember> houseHolds) {
-        this.address = address;
-        this.houseHolds = houseHolds;
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("HouseholdServedDto{");
-        sb.append("address='").append(address).append('\'');
-        sb.append(", houseHolds=").append(houseHolds);
-        sb.append('}');
-        return sb.toString();
-    }
 }

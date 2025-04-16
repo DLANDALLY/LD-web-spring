@@ -41,7 +41,7 @@ public class PersonController {
             return ResponseEntity
                     .status(HttpStatus.CREATED)
                     .body("Great! "+ personForm.getFirstName() +" has been successfully saved");
-        }catch (IllegalArgumentException | IOException e) {
+        }catch (IllegalArgumentException e) {
             return ResponseEntity
                     .badRequest()
                     .body(e.getMessage());
@@ -58,7 +58,7 @@ public class PersonController {
             return ResponseEntity
                     .status(HttpStatus.ACCEPTED)
                     .body("The personal data of " + personForm.getFirstName() + " has been successfully updated");
-        }catch (IllegalArgumentException | IOException e) {
+        }catch (IllegalArgumentException e) {
             return ResponseEntity
                     .badRequest()
                     .body(e.getMessage());
@@ -69,7 +69,7 @@ public class PersonController {
     public ResponseEntity<?> deletePerson(@RequestBody Person person) {
         try{
             return new ResponseEntity<>(personService.deletePerson(person), HttpStatus.ACCEPTED);
-        }catch (IllegalArgumentException | IOException e){
+        }catch (IllegalArgumentException e){
             return ResponseEntity
                     .badRequest()
                     .body(e.getMessage());

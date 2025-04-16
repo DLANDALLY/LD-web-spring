@@ -5,7 +5,6 @@ import com.dly.safetynet.entities.MedicalRecord;
 import com.dly.safetynet.entities.Person;
 import com.dly.safetynet.form.MedicalRecordForm;
 
-import java.io.IOException;
 import java.util.List;
 
 public interface IMedicalRecord {
@@ -14,9 +13,9 @@ public interface IMedicalRecord {
 
     List<MedicalRecord> findMedicalRecordByLastName(List<Person> persons);
 
-    void creatMedicalRecord(MedicalRecordForm medicalRecordForm) throws IOException;
+    void creatMedicalRecord(MedicalRecordForm medicalRecordForm);
 
-    void updateMedicalRecord(MedicalRecordForm medicalRecordForm) throws IOException;
+    void updateMedicalRecord(MedicalRecordForm medicalRecordForm);
 
-    String deleteMedicalRecord(MedicalRecord medicalRecord) throws IOException;
+    String deleteMedicalRecord(MedicalRecord medicalRecord);
 }

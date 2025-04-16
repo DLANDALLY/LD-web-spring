@@ -14,11 +14,4 @@ public class FloodStationDto {
         this.household = household;
     }
 
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("FloodStationDto{");
-        sb.append("household=").append(household);
-        sb.append('}');
-        return sb.toString();
-    }
 }

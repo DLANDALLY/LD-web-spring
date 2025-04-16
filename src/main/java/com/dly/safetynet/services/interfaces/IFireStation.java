@@ -29,9 +29,9 @@ public interface IFireStation {
 
     boolean isOver18(String birthDate);
 
-    void creatFireStation(FireStationForm fireStationForm) throws IOException;
+    void creatFireStation(FireStationForm fireStationForm);
 
-    void updateFireStation(FireStationForm fireStationForm) throws IOException;
+    void updateFireStation(FireStationForm fireStationForm);
 
-    String deleteFireStation(FireStation fireStation) throws IOException;
+    String deleteFireStation(FireStation fireStation);
 }

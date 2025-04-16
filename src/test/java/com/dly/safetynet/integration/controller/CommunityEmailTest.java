@@ -11,21 +11,21 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class ChildAlertControllerTest {
+class CommunityEmailTest {
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    void shouldGetChildAlert() throws Exception {
-        mockMvc.perform(get("/childAlert")
-                        .param("address", "892 Downing Ct"))
+    void shouldGetCommunityEmailByCity() throws Exception {
+        mockMvc.perform(get("/communityEmail")
+                        .param("city", "Culver"))
                 .andExpect(status().isOk());
     }
 
     @Test
-    void shouldGetChildAlertBadRequest() throws Exception {
-        mockMvc.perform(get("/childAlert")
-                        .param("addressee", "892 Downing Ct"))
+    void shouldGetCommunityEmailByCityBadRequest() throws Exception {
+        mockMvc.perform(get("/communityEmail")
+                        .param("cities", "123123"))
                 .andExpect(status().isBadRequest());
     }
 }

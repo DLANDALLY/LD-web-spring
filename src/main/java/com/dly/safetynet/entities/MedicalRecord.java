@@ -25,17 +25,4 @@ public class MedicalRecord {
         this.medications = medications;
         this.allergies = allergies;
     }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("MedicalRecord{");
-        sb.append("id=").append(id);
-        sb.append(", firstName='").append(firstName).append('\'');
-        sb.append(", lastName='").append(lastName).append('\'');
-        sb.append(", birthdate='").append(birthdate).append('\'');
-        sb.append(", medications=").append(medications);
-        sb.append(", allergies=").append(allergies);
-        sb.append('}');
-        return sb.toString();
-    }
 }

@@ -10,9 +10,6 @@ import java.util.List;
 public class ChildAlertDto {
     private List<ChildDto> children;
 
-    public ChildAlertDto() {
-    }
-
     public ChildAlertDto(List<ChildDto> children) {
         this.children = children;
     }

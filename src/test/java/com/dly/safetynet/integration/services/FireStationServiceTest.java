@@ -4,17 +4,15 @@ import com.dly.safetynet.dto.FireStationResponse;
 import com.dly.safetynet.dto.PersonDto;
 import com.dly.safetynet.entities.FireStation;
 import com.dly.safetynet.entities.MedicalRecord;
+import com.dly.safetynet.form.FireStationForm;
 import com.dly.safetynet.services.FireStationService;
-import com.dly.safetynet.services.JsonDataService;
-import com.dly.safetynet.services.interfaces.IMedicalRecord;
-import com.dly.safetynet.services.interfaces.IPerson;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -102,6 +100,44 @@ class FireStationServiceTest {
                 new PersonDto("Tenley", "Boyd", "1509 Culver St", "841-874-6514"));
     }
 
+    @Test
+    void shouldCreatFireStation(){
+        List<FireStation> fireStations = fireStationService.findAllFireStations();
+        int number = generateNumber();
+        FireStationForm fireStationForm = new FireStationForm();
+        fireStationForm.setAddress(number +" rue de la paix");
+        fireStationForm.setStation("3");
+
+        fireStationService.creatFireStation(fireStationForm);
+
+        assertEquals(number +" rue de la paix", fireStations.getLast().getAddress());
+        assertEquals("3", fireStations.getLast().getStation());
+    }
+
+    @Test
+    void shouldUpdateFireStation() {
+        List<FireStation> fireStations = fireStationService.findAllFireStations();
+        String numberStr = String.valueOf(generateNumber());
+
+        FireStationForm fireStationForm = new FireStationForm();
+        fireStationForm.setAddress(fireStations.getLast().getAddress());
+        fireStationForm.setStation(String.valueOf(numberStr));
+
+        fireStationService.updateFireStation(fireStationForm);
+
+        assertEquals(numberStr, fireStations.getLast().getStation());
+    }
+
+    @Test
+    void shouldDeleteFireStation() {
+        List<FireStation> fireStations = fireStationService.findAllFireStations();
+        FireStation fireStation = new FireStation();
+        fireStation.setAddress(fireStations.getLast().getAddress());
+        fireStation.setStation(fireStations.getLast().getStation());
+
+        assertEquals("The FireStation has been successfully deleted",fireStationService.deleteFireStation(fireStation));
+    }
+
     List<String> getAddressList(){
         return List.of(
                 "29 15th St",
@@ -121,5 +157,10 @@ class FireStationServiceTest {
                 new MedicalRecord("John", "Boyd", "03/06/1984",null,null),
                 new MedicalRecord("Jacob", "Boyd", "03/06/1989",null,null),
                 new MedicalRecord("Tenley", "Boyd", "02/18/2012",null,null));
+    }
+
+    int generateNumber() {
+        Random random = new Random();
+        return random.nextInt(1000 - 1 + 1) + 1;
     }
 }

@@ -38,7 +38,7 @@ public class MedicalRecordController {
             return ResponseEntity
                     .status(HttpStatus.CREATED)
                     .body("Great! The medical record of "+ medicalRecordForm.getFirstName() +" has been successfully saved");
-        }catch (IllegalArgumentException | IOException e) {
+        }catch (IllegalArgumentException e) {
             return ResponseEntity
                     .badRequest()
                     .body(e.getMessage());
@@ -55,7 +55,7 @@ public class MedicalRecordController {
             return ResponseEntity
                     .status(HttpStatus.ACCEPTED)
                     .body("The medical record data of " + medicalRecordForm.getFirstName() + " has been successfully updated");
-        }catch (IllegalArgumentException | IOException e) {
+        }catch (IllegalArgumentException e) {
             return ResponseEntity
                     .badRequest()
                     .body(e.getMessage());
@@ -66,7 +66,7 @@ public class MedicalRecordController {
     public ResponseEntity<?> deleteMedicalRecord(@RequestBody MedicalRecord medicalRecord) {
         try{
             return new ResponseEntity<>(medicalRecordService.deleteMedicalRecord(medicalRecord), HttpStatus.ACCEPTED);
-        }catch (IllegalArgumentException | IOException e){
+        }catch (IllegalArgumentException e){
             return ResponseEntity
                     .badRequest()
                     .body(e.getMessage());

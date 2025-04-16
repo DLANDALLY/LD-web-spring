@@ -19,19 +19,4 @@ public class FireStation {
         this.address = address;
         this.station = station;
     }
-
-    public FireStation(String address, String station) {
-        this.address = address;
-        this.station = station;
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("FireStation{");
-        sb.append("id=").append(id);
-        sb.append(", address='").append(address).append('\'');
-        sb.append(", station='").append(station).append('\'');
-        sb.append('}');
-        return sb.toString();
-    }
 }

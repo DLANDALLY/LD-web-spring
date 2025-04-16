@@ -9,7 +9,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,7 +55,7 @@ public class PersonService implements IPerson {
     }
 
     @Override
-    public void creatPerson(PersonForm personForm) throws IOException {
+    public void creatPerson(PersonForm personForm) {
         List<Person> persons = findAllPersons();
         Person person = personMapper(personForm);
         boolean personExist = PersonUtils.checkPersonExists(person, persons);
@@ -67,7 +66,7 @@ public class PersonService implements IPerson {
     }
 
     @Override
-    public void updatePerson(PersonForm personForm) throws IOException {
+    public void updatePerson(PersonForm personForm) {
         List<Person> persons = findAllPersons();
         Person person = personMapper(personForm);
 
@@ -85,7 +84,7 @@ public class PersonService implements IPerson {
     }
 
     @Override
-    public String deletePerson(Person person) throws IOException {
+    public String deletePerson(Person person) {
         List<Person> persons = findAllPersons();
         Person foundPerson = PersonUtils.findExactPerson(person, persons);
         if (foundPerson == null) throw new IllegalArgumentException("Person not found");

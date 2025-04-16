@@ -53,7 +53,7 @@ public class MedicalRecordService implements IMedicalRecord {
     }
 
     @Override
-    public void creatMedicalRecord(MedicalRecordForm medicalRecordForm) throws IOException {
+    public void creatMedicalRecord(MedicalRecordForm medicalRecordForm) {
         List<MedicalRecord> medicalRecords = findAllMedicalRecords();
         List<Person> persons = personService.findAllPersons();
         MedicalRecord medicalRecord = medicalRecordMapper(medicalRecordForm);
@@ -69,7 +69,7 @@ public class MedicalRecordService implements IMedicalRecord {
     }
 
     @Override
-    public void updateMedicalRecord(MedicalRecordForm medicalRecordForm) throws IOException {
+    public void updateMedicalRecord(MedicalRecordForm medicalRecordForm) {
         List<MedicalRecord> medicalRecords = findAllMedicalRecords();
         MedicalRecord medicalRecord = medicalRecordMapper(medicalRecordForm);
 
@@ -87,7 +87,7 @@ public class MedicalRecordService implements IMedicalRecord {
     }
 
     @Override
-    public String deleteMedicalRecord(MedicalRecord medicalRecord) throws IOException {
+    public String deleteMedicalRecord(MedicalRecord medicalRecord) {
         List<MedicalRecord> medicalRecords = findAllMedicalRecords();
         MedicalRecord foundMedicalRecord = MedicalRecordUtils.findExactMedicalRecord(medicalRecord, medicalRecords);
         if (foundMedicalRecord == null) throw new IllegalArgumentException("MedicalRecord not found");

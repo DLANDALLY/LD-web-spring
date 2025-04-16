@@ -4,7 +4,6 @@ import com.dly.safetynet.dto.PersonDto;
 import com.dly.safetynet.entities.Person;
 import com.dly.safetynet.form.PersonForm;
 
-import java.io.IOException;
 import java.util.List;
 
 public interface IPerson {
@@ -16,9 +15,9 @@ public interface IPerson {
 
     List<String> findEmailByCity(String city);
 
-    void creatPerson(PersonForm personForm) throws IOException;
+    void creatPerson(PersonForm personForm);
 
-    void updatePerson(PersonForm personForm) throws IOException;
+    void updatePerson(PersonForm personForm);
 
-    String deletePerson(Person person) throws IOException;
+    String deletePerson(Person person);
 }

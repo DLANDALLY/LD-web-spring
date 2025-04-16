@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 
 @RestController
 @RequestMapping("/firestation")
@@ -56,7 +55,7 @@ public class FireStationController {
             return ResponseEntity
                     .status(HttpStatus.CREATED)
                     .body("Great! Firestation has been successfully saved");
-        }catch (IllegalArgumentException | IOException e) {
+        }catch (IllegalArgumentException e) {
             return ResponseEntity
                     .badRequest()
                     .body(e.getMessage());
@@ -73,7 +72,7 @@ public class FireStationController {
             return ResponseEntity
                     .status(HttpStatus.ACCEPTED)
                     .body("The Firestation has been successfully updated");
-        }catch (IllegalArgumentException | IOException e) {
+        }catch (IllegalArgumentException e) {
             return ResponseEntity
                     .badRequest()
                     .body(e.getMessage());
@@ -84,7 +83,7 @@ public class FireStationController {
     public ResponseEntity<?> deleteFirestation(@RequestBody FireStation fireStation) {
         try{
             return new ResponseEntity<>(fireStationService.deleteFireStation(fireStation), HttpStatus.ACCEPTED);
-        }catch (IllegalArgumentException | IOException e){
+        }catch (IllegalArgumentException e){
             return ResponseEntity
                     .badRequest()
                     .body(e.getMessage());

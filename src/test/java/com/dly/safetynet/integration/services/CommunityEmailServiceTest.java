@@ -20,6 +20,6 @@ class CommunityEmailServiceTest {
         List<String> emails = personService.findEmailByCity("Culver");
 
         assertNotNull(emails);
-        assertEquals("jaboyd@email.com", emails.getFirst());
+        assertEquals("drk@email.com", emails.getFirst());
     }
 }
