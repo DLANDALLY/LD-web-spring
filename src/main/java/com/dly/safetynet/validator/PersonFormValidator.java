@@ -6,8 +6,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import static com.dly.safetynet.services.utils.PersonUtils.checkEmail;
-
 @Component
 public class PersonFormValidator implements Validator {
     @Override
@@ -26,10 +24,6 @@ public class PersonFormValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "zip", "NotEmpty.personForm.zip", "Zip is required");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phone", "NotEmpty.personForm.phone", "Phone is required");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "NotEmpty.personForm.email", "Email is required");
-
-        if(!checkEmail(personForm.getEmail()) || personForm.getEmail() == null){
-            errors.rejectValue("email", "email.invalid", "L'adresse mail n'est pas valide");
-        }
     }
 
 

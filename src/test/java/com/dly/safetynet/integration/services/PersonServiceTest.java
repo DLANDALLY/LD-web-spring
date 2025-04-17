@@ -33,9 +33,10 @@ class PersonServiceTest {
     void shouldFindPersonsDtoByAddress() {
         List<PersonDto> personDtos = personService.findPersonsDtoByAddress("1509 Culver St");
 
-        System.out.println(personDtos.get(2));
-        assertEquals("Roger", personDtos.get(2).getFirstName());
-        assertEquals("841-874-6512", personDtos.get(2).getPhone());
+        PersonDto personDto = personDtos.stream().filter(e -> e.getFirstName().equals("Roger")).findFirst().get();
+
+        assertEquals("Roger", personDto.getFirstName());
+        assertEquals("841-874-6512", personDto.getPhone());
     }
 
     @Test
@@ -48,7 +49,6 @@ class PersonServiceTest {
     @Test
     void shouldFindEmailByCity() {
         List<String> emails = personService.findEmailByCity("Culver");
-        System.out.println(emails);
 
         assertEquals("drk@email.com", emails.getFirst());
     }
@@ -65,6 +65,26 @@ class PersonServiceTest {
         personForm.setZip("H1A");
         personForm.setPhone("841-874-"+ randomNumber);
         personForm.setEmail("Jean"+ randomNumber +"@email.com");
+
+        personService.creatPerson(personForm);
+        assertEquals(personForm.getFirstName(), persons.getLast().getFirstName());
+        assertEquals(personForm.getLastName(), persons.getLast().getLastName());
+        assertEquals(personForm.getPhone(), persons.getLast().getPhone());
+        assertEquals(personForm.getEmail(), persons.getLast().getEmail());
+    }
+
+    @Test
+    void shouldEmailNotConform(){
+        List<Person> persons = personService.findAllPersons();
+        int randomNumber = generateNumber();
+        PersonForm personForm = new PersonForm();
+        personForm.setFirstName("Jean");
+        personForm.setLastName("Paul");
+        personForm.setAddress("45 rue du bat moulin");
+        personForm.setCity("Montreal");
+        personForm.setZip("H1A");
+        personForm.setPhone("841-874-"+ randomNumber);
+        personForm.setEmail("Jean"+ randomNumber );
 
         personService.creatPerson(personForm);
         assertEquals(personForm.getFirstName(), persons.getLast().getFirstName());

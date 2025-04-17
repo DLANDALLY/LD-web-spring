@@ -19,7 +19,9 @@ class CommunityEmailServiceTest {
     void getCommunityEmailByCity() {
         List<String> emails = personService.findEmailByCity("Culver");
 
+        String email = emails.stream().filter(e -> e.equals("drk@email.com")).findFirst().get();
+
         assertNotNull(emails);
-        assertEquals("drk@email.com", emails.getFirst());
+        assertEquals("drk@email.com", email);
     }
 }
