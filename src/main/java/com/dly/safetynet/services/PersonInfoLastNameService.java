@@ -7,12 +7,14 @@ import com.dly.safetynet.services.interfaces.IChildAlert;
 import com.dly.safetynet.services.interfaces.IMedicalRecord;
 import com.dly.safetynet.services.interfaces.IPerson;
 import com.dly.safetynet.services.interfaces.IPersonInfoLastName;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class PersonInfoLastNameService implements IPersonInfoLastName {
     @Autowired
@@ -24,6 +26,7 @@ public class PersonInfoLastNameService implements IPersonInfoLastName {
 
     @Override
     public List<PersonInfoLastNameDto> getPersonInfoLastName(String lastName) {
+        log.info("getPersonInfoLastName lastName {}", lastName);
         List<Person> persons = personService.findPersonsByLastName(lastName);
 
         List<MedicalRecord> records = recordService.findMedicalRecordByLastName(persons);

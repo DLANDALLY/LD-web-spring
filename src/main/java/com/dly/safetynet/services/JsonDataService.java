@@ -6,6 +6,7 @@ import com.dly.safetynet.entities.MedicalRecord;
 import com.dly.safetynet.entities.Person;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 public class JsonDataService {
     private List<Object> listeners = new ArrayList<>();
@@ -28,17 +30,20 @@ public class JsonDataService {
 
     public void loadDataFromJson() {
         try {
+            log.info("Loading data from json file {}", filePath);
             JsonDataWrapper dataWrapper = objectMapper.readValue(filePath, JsonDataWrapper.class);
             persons = dataWrapper.getPersons();
             firestations = dataWrapper.getFirestations();
             medicalRecords = dataWrapper.getMedicalrecords();
         } catch (IOException e) {
+            log.error("Error while loading data from json file {}", filePath, e);
             e.printStackTrace();
         }
     }
 
     public void writeDataToJson(Object object) {
         try {
+            log.info("Writing data to json file {}", filePath);
             JsonDataWrapper dataWrapper = objectMapper.readValue(filePath, JsonDataWrapper.class);
 
             var typeClass = object.getClass();
@@ -48,12 +53,14 @@ public class JsonDataService {
 
         objectMapper.writerWithDefaultPrettyPrinter().writeValue(filePath, dataWrapper);
         }catch (IOException e) {
+            log.error("Error while writing data to json file {}", filePath, e);
             e.getMessage();
         }
     }
 
     public void updateDataToJson(List<?> objects) {
         try {
+            log.info("Updating data to json file {}", filePath);
             JsonDataWrapper dataWrapper = objectMapper.readValue(filePath, JsonDataWrapper.class);
             var typeClass = objects.getFirst().getClass();
 
@@ -63,6 +70,7 @@ public class JsonDataService {
 
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(filePath, dataWrapper);
         }catch (IOException e) {
+            log.error("Error while updating data to json file {}", filePath, e);
             e.getMessage();
         }
     }

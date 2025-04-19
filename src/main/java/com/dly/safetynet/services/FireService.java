@@ -5,6 +5,7 @@ import com.dly.safetynet.dto.fire.FireDto;
 import com.dly.safetynet.dto.fire.PersonFireDto;
 import com.dly.safetynet.entities.MedicalRecord;
 import com.dly.safetynet.services.interfaces.*;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class FireService implements IFire {
     @Autowired
@@ -28,6 +30,7 @@ public class FireService implements IFire {
 
     @Override
     public FireDto getFireAddress(String address) {
+        log.info("Getting fire address");
         if (address.isBlank()) throw new IllegalArgumentException("Address must not be empty");
 
         List<PersonDto> personsDto = personService.findPersonsDtoByAddress(address);

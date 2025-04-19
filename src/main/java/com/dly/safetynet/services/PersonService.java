@@ -5,6 +5,7 @@ import com.dly.safetynet.entities.Person;
 import com.dly.safetynet.form.PersonForm;
 import com.dly.safetynet.services.interfaces.IPerson;
 import com.dly.safetynet.services.utils.PersonUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class PersonService implements IPerson {
     @Autowired
@@ -56,6 +58,7 @@ public class PersonService implements IPerson {
 
     @Override
     public void creatPerson(PersonForm personForm) {
+        log.info("creating person {}", personForm);
         List<Person> persons = findAllPersons();
         Person person = personMapper(personForm);
         boolean personExist = PersonUtils.checkPersonExists(person, persons);
@@ -67,6 +70,7 @@ public class PersonService implements IPerson {
 
     @Override
     public void updatePerson(PersonForm personForm) {
+        log.info("updating person {}", personForm);
         List<Person> persons = findAllPersons();
         Person person = personMapper(personForm);
 
@@ -85,6 +89,7 @@ public class PersonService implements IPerson {
 
     @Override
     public String deletePerson(Person person) {
+    log.info("deleting person {}", person);
         List<Person> persons = findAllPersons();
         Person foundPerson = PersonUtils.findExactPerson(person, persons);
         if (foundPerson == null) throw new IllegalArgumentException("Person not found");

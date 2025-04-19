@@ -3,7 +3,7 @@
     "id" : 1,
     "firstName" : "John",
     "lastName" : "Boyd",
-    "address" : "918 avenue du chateau",
+    "address" : "64 avenue du chateau",
     "city" : "Montreal",
     "zip" : "H1A",
     "phone" : "841-874-6512",
@@ -21,9 +21,9 @@
     "id" : 3,
     "firstName" : "Tenley",
     "lastName" : "Boyd",
-    "address" : "87 Main St",
+    "address" : "49 Main St",
     "city" : "Montreal",
-    "zip" : "H116A1",
+    "zip" : "H127A1",
     "phone" : "841-874-6512",
     "email" : "tenz@email.com"
   }, {
@@ -224,6 +224,24 @@
     "zip" : "H1A",
     "phone" : "841-874-816",
     "email" : "Jean816@email.com"
+  }, {
+    "id" : 26,
+    "firstName" : "John",
+    "lastName" : "Doe",
+    "address" : "123 Main St",
+    "city" : "Montreal",
+    "zip" : "H1A1A1",
+    "phone" : "50-456-7890",
+    "email" : "john.doe59@example.com"
+  }, {
+    "id" : 27,
+    "firstName" : "Jean",
+    "lastName" : "Paul",
+    "address" : "45 rue du bat moulin",
+    "city" : "Montreal",
+    "zip" : "H1A",
+    "phone" : "841-874-793",
+    "email" : "Jean793@email.com"
   } ],
   "firestations" : [ {
     "id" : null,
@@ -248,7 +266,7 @@
   }, {
     "id" : null,
     "address" : "112 Steppes Pl",
-    "station" : "90"
+    "station" : "41"
   }, {
     "id" : null,
     "address" : "489 Manchester St",
@@ -281,14 +299,18 @@
     "id" : null,
     "address" : "455 rue de la paix",
     "station" : "3"
+  }, {
+    "id" : null,
+    "address" : "428 rue de la paix",
+    "station" : "3"
   } ],
   "medicalrecords" : [ {
     "id" : null,
     "firstName" : "John",
     "lastName" : "Boyd",
     "birthdate" : "03/06/1984",
-    "medications" : [ "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications" ],
-    "allergies" : [ "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies" ]
+    "medications" : [ "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications", "Medications" ],
+    "allergies" : [ "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies", "Allergies" ]
   }, {
     "id" : null,
     "firstName" : "Jacob",
@@ -440,7 +462,7 @@
     "id" : null,
     "firstName" : "John",
     "lastName" : "Boyd",
-    "birthdate" : "79/06/1979",
+    "birthdate" : "91/06/1991",
     "medications" : null,
     "allergies" : null
   } ]

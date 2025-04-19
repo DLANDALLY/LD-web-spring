@@ -8,6 +8,7 @@ import com.dly.safetynet.entities.MedicalRecord;
 import com.dly.safetynet.services.interfaces.IChildAlert;
 import com.dly.safetynet.services.interfaces.IMedicalRecord;
 import com.dly.safetynet.services.interfaces.IPerson;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class ChildAlertService implements IChildAlert {
     @Autowired
@@ -29,6 +31,7 @@ public class ChildAlertService implements IChildAlert {
 
     @Override
     public ChildAlertDto getChildAlert(String address){
+        log.info("Getting child alert");
         if (address.isBlank()) throw new IllegalArgumentException("Address cannot be blank");
 
         List<PersonDto> persons = personService.findPersonsDtoByAddress(address);

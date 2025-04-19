@@ -9,6 +9,7 @@ import com.dly.safetynet.services.interfaces.IFireStation;
 import com.dly.safetynet.services.interfaces.IMedicalRecord;
 import com.dly.safetynet.services.interfaces.IPerson;
 import com.dly.safetynet.services.utils.FireStationUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class FireStationService implements IFireStation {
     @Autowired
@@ -37,6 +39,7 @@ public class FireStationService implements IFireStation {
 
     @Override
     public FireStationResponse personCoverageByFireStation(String station) {
+        log.info("Getting fire coverage by person coverage {}", station);
         if (station == null || station.isBlank()) throw new IllegalArgumentException("Station number cannot be null or blank");
 
         List<String> address = findAddress(station);

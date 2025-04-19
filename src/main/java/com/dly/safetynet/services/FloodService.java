@@ -9,6 +9,7 @@ import com.dly.safetynet.services.interfaces.IChildAlert;
 import com.dly.safetynet.services.interfaces.IFireStation;
 import com.dly.safetynet.services.interfaces.IFlood;
 import com.dly.safetynet.services.interfaces.IMedicalRecord;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class FloodService implements IFlood {
     @Autowired
@@ -25,21 +27,10 @@ public class FloodService implements IFlood {
     @Autowired
     private IChildAlert childAlertService;
 
-    /**
-     * http://localhost:8081/flood/stations?stations=<a list of station_numbers>
-     * Cette url doit retourner :
-     * - une liste de tous les foyers desservis par la caserne
-     *      - Cette liste doit regrouper les personnes par adresse
-     *      - Elle doit aussi inclure :
-     *          - le nom
-     *          - le numéro de téléphone
-     *          - l'âge des habitants
-     *          - faire figurer leurs antécédents médicaux (médicaments, posologie et allergies)
-     *              à côté de chaque nom
-     */
+
     @Override
     public FloodStationDto getFloodStations(List<String> stationNumbers) {
-        // TODO Ajout des exceptions
+        log.info("Getting flood stations");
         Set<String> address = getAdresses(stationNumbers);
 
         List<PersonDto> persons = fireStationService.getPersonsDto(address);
